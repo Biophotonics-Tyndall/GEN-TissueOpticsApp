@@ -1,7 +1,45 @@
-//const absSpectra = getData();
-chartData_chrom();
-chartData_tissue();
+let absSpectra;
+let tissueChart;
+const button = document.getElementById('update');
 
+button.addEventListener('click', async event => {
+    updateTissueChart();
+});
+
+getData()
+    .then(response => {
+        absSpectra = response;
+        chartData_chrom();
+        chartData_tissue()
+            .then(response => {
+                tissueChart = response;
+            });
+    });
+
+function updateTissueChart() {
+    const cBlood1 = document.getElementById('BloodConc_1').value;
+    const cWater1 = document.getElementById('WaterConc_1').value;
+    const cLipid1 = document.getElementById('LipidConc_1').value;
+    const Saturation1 = document.getElementById('BloodSat_1').value;
+    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,absSpectra);
+    tissueChart.data.datasets[0].data = absorption1;
+
+    const cBlood2 = document.getElementById('BloodConc_2').value;
+    const cWater2 = document.getElementById('WaterConc_2').value;
+    const cLipid2 = document.getElementById('LipidConc_2').value;
+    const Saturation2 = document.getElementById('BloodSat_2').value;
+    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,absSpectra);
+    tissueChart.data.datasets[1].data = absorption2;
+
+    const cBlood3 = document.getElementById('BloodConc_3').value;
+    const cWater3 = document.getElementById('WaterConc_3').value;
+    const cLipid3 = document.getElementById('LipidConc_3').value;
+    const Saturation3 = document.getElementById('BloodSat_3').value;
+    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,absSpectra);
+    tissueChart.data.datasets[2].data = absorption3;
+
+    tissueChart.update();
+};
 async function getData() { // load the data for the absorption spectra 
     const data = await fetch("absorptionSpectra.json");
     const absSpectra_json = await data.json();
@@ -17,14 +55,11 @@ function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) {
         const abs = cHb*spectra.hb[i]+cHbO*spectra.hbo2[i]+cWater*spectra.water[i]/100+cLipid*spectra.lipid[i]/100;
         absorption.push(abs);
     }
-    //const chemo = cblood*(1-sat/100)/100;
-    //const chemoo2 = cblood*(sat/100)/100;
-    //const absorption = chemo*hemo+chemoo2*hemoo2+ch2o*h20/100+cfat*fat/100;
     return absorption;
 }
 
 async function chartData_tissue() {
-    const absSpectra = await getData();
+    //const absSpectra = await getData();
 
     const cBlood1 = document.getElementById('BloodConc_1').value;
     const cWater1 = document.getElementById('WaterConc_1').value;
@@ -97,6 +132,7 @@ async function chartData_tissue() {
             }
         }
     });
+    return myChart;
 }
 
 async function chartData_chrom() { // plot the data for the absorption spectra 
