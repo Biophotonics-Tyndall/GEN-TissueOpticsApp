@@ -6,6 +6,16 @@ button.addEventListener('click', async event => {
     updateTissueChart();
 });
 
+function changeScale(){
+    const x = document.getElementById("check_log");
+    if (x.checked) {
+        tissueChart.options.scales.y.type = 'logarithmic';
+    } else {
+        tissueChart.options.scales.y.type = 'linear';
+    }
+    tissueChart.update();
+}
+
 getData()
     .then(response => {
         absSpectra = response;
@@ -59,7 +69,8 @@ function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) {
 }
 
 async function chartData_tissue() {
-    //const absSpectra = await getData();
+    const x = document.getElementById("check_log");
+    x.checked = true;
 
     const cBlood1 = document.getElementById('BloodConc_1').value;
     const cWater1 = document.getElementById('WaterConc_1').value;
@@ -120,7 +131,7 @@ async function chartData_tissue() {
                     min: 10,
                     title: {
                         display: 'true',
-                        text: 'Absorption'
+                        text: 'Absorption (1/m)'
                     },
                 },
                 x: {
