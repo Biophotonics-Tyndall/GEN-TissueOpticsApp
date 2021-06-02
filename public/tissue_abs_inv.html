@@ -8,6 +8,7 @@
     <meta name="author" content="name">
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="./css/mystylesheet.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
   </head>
   <body>
@@ -22,26 +23,26 @@
           </tr>
           <tr>
             <th>Blood Concentration</th>
-            <th><input id="BloodConc" value="5" /></th>
+            <th><input type="number" id="BloodConc" value="5" /></th>
           </tr>
           <tr>
             <th>Blood saturation</th>
-            <th><input id="BloodSat" value="60" /></th>
+            <th><input type="number" id="BloodSat" value="60" /></th>
           </tr>
           <tr>
             <th>Water concentration</th>
-            <th><input id="WaterConc" value="65" /></th>
+            <th><input type="number" id="WaterConc" value="65" /></th>
           </tr>
           <tr>
             <th>Lipid concentration</th>
-            <th><input id="LipidConc" value="15" /></th>
+            <th><input type="number" id="LipidConc" value="15" /></th>
           </tr>
         </table>
 
-        Choose a reference spectrum (number between 1 and 21): <input id="refSpecNumber" value="1" /> <button id='selectRefSpec'>Select</button>
+        Choose a reference spectrum (number between 1 and 21): <input type="number" id="refSpecNumber" value="1" /> <button id='selectRefSpec'>Select</button>
 
         <h4>Display options</h4>
-        Wavelength: Minimum: <input id="wv_min" value="260" /> Maximum <input id="wv_max" value="1580" />
+        Wavelength: Minimum: <input type="number" id="wv_min" value="260" /> Maximum <input type="number" id="wv_max" value="1580" />
         Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
         <button id='update'>Update</button>
       </p>
