@@ -39,15 +39,29 @@
           </tr>
         </table>
 
-        Choose a reference spectrum (number between 1 and 21): <input type="number" id="refSpecNumber" value="1" /> <button id='selectRefSpec'>Select</button>
+        Choose a reference spectrum (number between 1 and 21): 
+        <input type="number" id="refSpecNumber" value="1" /> 
+        <button id='selectRefSpec'>Select</button>
 
         <h4>Display options</h4>
-        Wavelength: Minimum: <input type="number" id="wv_min" value="260" /> Maximum <input type="number" id="wv_max" value="1580" />
+        <div>
+          <label for='wv_min'>Wavelength: Minimum:</label>
+          <input type="number" id="wv_min" value="260" /> 
+        </div>
+        <div>
+          <label for="wv_max">Maximum</label> 
+          <input type="number" id="wv_max" value="1580" />
+        </div>
         Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
         <button id='update'>Update</button>
       </p>
       <canvas id="chart_spectra" width="10" height="5"></canvas>
   
+    <div class="footer">
+      <p>Tissue Optic App</p>
+      <div>Developed by: B. Jayet and J.S. Matias</div>
+    </div>
+
   </body>
   <script src="../js/tissue_abs_inv.js"></script>
 </html>
