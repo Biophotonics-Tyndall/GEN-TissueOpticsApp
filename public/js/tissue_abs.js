@@ -48,6 +48,20 @@ function updateTissueChart() {
     const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,absSpectra);
     tissueChart.data.datasets[2].data = absorption3;
 
+    let wv_min = parseInt(document.getElementById('wv_min').value);
+    let wv_max = parseInt(document.getElementById('wv_max').value);
+
+    if(wv_min < 260) {
+        wv_min = 260;
+        document.getElementById('wv_min').value = "260";
+    };
+    if(wv_max > 1580) {
+        wv_max = 1580;
+        document.getElementById('wv_min').value = "1580";
+    };
+
+    tissueChart.options.scales.x.min = wv_min;
+    tissueChart.options.scales.x.max = wv_max;
     tissueChart.update();
 };
 async function getData() { // load the data for the absorption spectra 
