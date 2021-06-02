@@ -6,16 +6,6 @@ button.addEventListener('click', async event => {
     updateTissueChart();
 });
 
-function changeScale(){
-    const x = document.getElementById("check_log");
-    if (x.checked) {
-        tissueChart.options.scales.y.type = 'logarithmic';
-    } else {
-        tissueChart.options.scales.y.type = 'linear';
-    }
-    tissueChart.update();
-}
-
 getData()
     .then(response => {
         absSpectra = response;
@@ -25,6 +15,16 @@ getData()
                 tissueChart = response;
             });
     });
+
+function changeScale(){
+    const x = document.getElementById("check_log");
+    if (x.checked) {
+        tissueChart.options.scales.y.type = 'logarithmic';
+    } else {
+        tissueChart.options.scales.y.type = 'linear';
+    }
+    tissueChart.update();
+}
 
 function updateTissueChart() {
     const cBlood1 = document.getElementById('BloodConc_1').value;
