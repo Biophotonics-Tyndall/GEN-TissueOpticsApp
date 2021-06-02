@@ -4,16 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>title</title>
+    <title>Inverse tissue absorption</title>
     <meta name="author" content="name">
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="./css/mystylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
   </head>
   <body>
       <h1>Inverse tissue absorption</h1>
+      <p><a href="index.html">Back to app choice</a><br /></p>
+      <h2>Match the spectrum</h2>
       <p>
-        Coucou
+        <table id="TissueProp">
+          <tr>
+            <th></th>
+            <th>Your tissue</th>
+          </tr>
+          <tr>
+            <th>Blood Concentration</th>
+            <th><input type="number" id="BloodConc" value="5" /></th>
+          </tr>
+          <tr>
+            <th>Blood saturation</th>
+            <th><input type="number" id="BloodSat" value="60" /></th>
+          </tr>
+          <tr>
+            <th>Water concentration</th>
+            <th><input type="number" id="WaterConc" value="65" /></th>
+          </tr>
+          <tr>
+            <th>Lipid concentration</th>
+            <th><input type="number" id="LipidConc" value="15" /></th>
+          </tr>
+        </table>
+
+        Choose a reference spectrum (number between 1 and 21): <input type="number" id="refSpecNumber" value="1" /> <button id='selectRefSpec'>Select</button>
+
+        <h4>Display options</h4>
+        Wavelength: Minimum: <input type="number" id="wv_min" value="260" /> Maximum <input type="number" id="wv_max" value="1580" />
+        Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
+        <button id='update'>Update</button>
       </p>
+      <canvas id="chart_spectra" width="10" height="5"></canvas>
   
   </body>
+  <script src="js/tissue_abs_inv.js"></script>
 </html>
