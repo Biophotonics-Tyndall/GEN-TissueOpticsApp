@@ -1,13 +1,15 @@
-let Spectra;
-let targetSpec;
-let tissueChart;
-const button_update = document.getElementById('update');
-const button_refSpec = document.getElementById('selectRefSpec');
+let Spectra; // Variable containing the Spectra used in the app
+let targetSpec; // Variable containing the reference spectrum (spectrum that needs to be matched)
+let tissueChart; // Variable pointing to the chart object
 
+// Initialise buttons to update the graph
+const button_update = document.getElementById('update');
 button_update.addEventListener('click', async event => {
     updateTissueChart();
 });
 
+// Initialise buttons to selete the reference spectra
+const button_refSpec = document.getElementById('selectRefSpec');
 button_refSpec.addEventListener('click', async event => {
     changeRefSpectrum();
 });
@@ -16,66 +18,25 @@ getData()
     .then(response => {
         Spectra = response;
         targetSpec = Spectra.ref.abs[0];
-        charSpectra()
+        plotSpectra()
             .then(response => {
                 tissueChart = response;
             });
         //console.log(absSpectra);
     });
 
-function updateTissueChart() {
-    const cBlood = document.getElementById('BloodConc').value;
-    const cWater = document.getElementById('WaterConc').value;
-    const cLipid = document.getElementById('LipidConc').value;
-    const Saturation = document.getElementById('BloodSat').value;
-    const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra.chrom);
-    tissueChart.data.datasets[1].data = absorption;
-
-    let wv_min = parseInt(document.getElementById('wv_min').value);
-    let wv_max = parseInt(document.getElementById('wv_max').value);
-
-    if(wv_min < 260) {
-        wv_min = 260;
-        document.getElementById('wv_min').value = "260";
-    };
-    if(wv_max > 1580) {
-        wv_max = 1580;
-        document.getElementById('wv_min').value = "1580";
-    };
-
-    tissueChart.options.scales.x.min = wv_min;
-    tissueChart.options.scales.x.max = wv_max;
-    tissueChart.update();
-};
-
-function changeScale(){
-    const x = document.getElementById("check_log");
-    if (x.checked) {
-        tissueChart.options.scales.y.type = 'logarithmic';
-    } else {
-        tissueChart.options.scales.y.type = 'linear';
-    }
-    tissueChart.update();
-}
-
-async function getData() { // load the data for the absorption spectra 
-    const data1 = await fetch("abs_spec.json");
+// Functions
+async function getData() { // Function to load all the data necessary for the application
+    const data1 = await fetch("ReferenceAbsorptionSpectra.json");
     const ref = await data1.json();
 
-    const data2 = await fetch("absorptionSpectra.json");
+    const data2 = await fetch("ChromophoresAbsorptionSpectra.json");
     const chrom = await data2.json();
 
     return {ref, chrom};
 }
 
-async function changeRefSpectrum() {
-    const specNumber = parseInt(document.getElementById("refSpecNumber").value);
-    targetSpec = Spectra.ref.abs[specNumber-1];
-    tissueChart.data.datasets[0].data = targetSpec;
-    tissueChart.update();
-}
-
-async function charSpectra() {
+async function plotSpectra() { // Function to initiliase the plot
     const x = document.getElementById("check_log");
     x.checked = true;
 
@@ -134,7 +95,51 @@ async function charSpectra() {
     return myChart
 }
 
-function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) {
+function updateTissueChart() { // Function to update the chart
+    const cBlood = document.getElementById('BloodConc').value;
+    const cWater = document.getElementById('WaterConc').value;
+    const cLipid = document.getElementById('LipidConc').value;
+    const Saturation = document.getElementById('BloodSat').value;
+    const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra.chrom);
+    tissueChart.data.datasets[1].data = absorption;
+
+    let wv_min = parseInt(document.getElementById('wv_min').value);
+    let wv_max = parseInt(document.getElementById('wv_max').value);
+
+    if(wv_min < 260) {
+        wv_min = 260;
+        document.getElementById('wv_min').value = "260";
+    };
+    if(wv_max > 1580) {
+        wv_max = 1580;
+        document.getElementById('wv_min').value = "1580";
+    };
+
+    tissueChart.options.scales.x.min = wv_min;
+    tissueChart.options.scales.x.max = wv_max;
+    tissueChart.update();
+};
+
+function changeScale(){ // Function to change the scale from linear to logarithmic
+    const x = document.getElementById("check_log");
+    if (x.checked) {
+        tissueChart.options.scales.y.type = 'logarithmic';
+    } else {
+        tissueChart.options.scales.y.type = 'linear';
+    }
+    tissueChart.update();
+}
+
+async function changeRefSpectrum() { // Function to change the reference spectrum
+    const specNumber = parseInt(document.getElementById("refSpecNumber").value);
+    targetSpec = Spectra.ref.abs[specNumber-1];
+    tissueChart.data.datasets[0].data = targetSpec;
+    tissueChart.update();
+}
+
+
+
+function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to calculate the absorption spectrum of the tissue
     const absorption = [];
     const cHb = (cBlood*(1-Saturation/100))/100;
     const cHbO = (cBlood*Saturation/100)/100;
