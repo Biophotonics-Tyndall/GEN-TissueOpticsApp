@@ -59,10 +59,10 @@ function changeScale(){
 }
 
 async function getData() { // load the data for the absorption spectra 
-    const data1 = await fetch("abs_spec.json");
+    const data1 = await fetch("ReferenceAbsorptionSpectra.json");
     const ref = await data1.json();
 
-    const data2 = await fetch("absorptionSpectra.json");
+    const data2 = await fetch("ChromophoresAbsorptionSpectra.json");
     const chrom = await data2.json();
 
     return {ref, chrom};

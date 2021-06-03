@@ -65,7 +65,7 @@ function updateTissueChart() {
     tissueChart.update();
 };
 async function getData() { // load the data for the absorption spectra 
-    const data = await fetch("absorptionSpectra.json");
+    const data = await fetch("ChromophoresAbsorptionSpectra.json");
     const absSpectra_json = await data.json();
     return absSpectra_json;
 }
