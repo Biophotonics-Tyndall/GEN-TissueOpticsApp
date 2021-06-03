@@ -8,12 +8,32 @@
     <meta name="author" content="name">
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="../css/mystylesheet.css">
   </head>
   <body>
+    <script src="components/layout.js"></script>
       <h1>Diffusion equation</h1>
       <p>
         Coucou
       </p>
+      <div class="grid-container">
+        <div class="chart-area">
+          some nice chart
+        </div>
+        <div class="options-area">
+          Options
+          <div>
+            <label for='wv_min'>Wavelength: Minimum:</label>
+            <input type="range" id="wv_min" value="260" /> 
+          </div>
+          <div>
+            <label for="wv_max">Maximum</label> 
+            <input type="range" id="wv_max" value="1580" />
+          </div>
+          Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
+        </div>
+      </div>
+      
   
   </body>
 </html>
