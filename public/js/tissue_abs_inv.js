@@ -1,3 +1,9 @@
+// JavaScript code for the page tissue_abs_inv.html
+// Part of the TissueOpticsApp
+// Written by B. Jayet & J. S. Matias 
+// Adapted from a MATLAB based app by J. Gunther
+
+// Variable declaration
 let Spectra; // Variable containing the Spectra used in the app
 let targetSpec; // Variable containing the reference spectrum (spectrum that needs to be matched)
 let tissueChart; // Variable pointing to the chart object
@@ -14,6 +20,7 @@ button_refSpec.addEventListener('click', async event => {
     changeRefSpectrum();
 });
 
+// Operation donn when the page is opened
 getData()
     .then(response => {
         Spectra = response;
@@ -22,7 +29,6 @@ getData()
             .then(response => {
                 tissueChart = response;
             });
-        //console.log(absSpectra);
     });
 
 // Functions

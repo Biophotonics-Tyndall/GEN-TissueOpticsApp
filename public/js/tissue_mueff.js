@@ -1,6 +1,12 @@
+// JavaScript code for the page tissue_mueff.html
+// Part of the TissueOpticsApp
+// Written by B. Jayet & J. S. Matias 
+// Adapted from a MATLAB based app by J. Gunther
+
+// Variable declaration
 let Spectra; // Variable containing the Spectra used in the app
-let muChart;
-let mueffChart;
+let muChart; // Variable pointing to the chart object containing mua and mus
+let mueffChart; // Variable pointing to the chart object containing mueff
 
 // Initialise buttons to update the graph
 const button = document.getElementById('update');
@@ -8,6 +14,7 @@ button.addEventListener('click', async event => {
     updateCharts();
 });
 
+// Operation donn when the page is opened
 getData()
     .then(response => {
         Spectra = response;
