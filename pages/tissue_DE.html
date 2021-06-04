@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Diffusion equation</title>
+    <meta name="author (adaptation to JavaScript)" content="Baptiste Jayet">
+    <meta name="author (adaptation to JavaScript)" content="Jean S. Matias">
+    <meta name="author (original MATLAB code)" content="Jacqueline Gunther">
+    <meta name="description" content="description here">
+    <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="../css/mystylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
+  </head>
+  <body>
+    <script src="components/layout.js"></script>
+      <h1>Diffusion equation</h1>
+      
+      <h2>Tissue properties</h2>
+      <table id="TissueProp">
+        <tr>
+          <th></th>
+          <th>Your tissue</th>
+        </tr>
+        <tr>
+          <th>Blood Concentration</th>
+          <th><input type="number" id="BloodConc" value="5" /></th>
+        </tr>
+        <tr>
+          <th>Blood saturation</th>
+          <th><input type="number" id="BloodSat" value="60" /></th>
+        </tr>
+        <tr>
+          <th>Water concentration</th>
+          <th><input type="number" id="WaterConc" value="65" /></th>
+        </tr>
+        <tr>
+          <th>Lipid concentration</th>
+          <th><input type="number" id="LipidConc" value="15" /></th>
+        </tr>
+
+        <h2>Scattering properties</h2>
+        <table id="ScatProp">
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+          <tr>
+            <th>Rayleigh scattering probability factor</th>
+            <th><input type="number" id="RayProbFactor" value="500" /></th>
+          </tr>
+          <tr>
+            <th>Mie scattering probability factor</th>
+            <th><input type="number" id="MieProbFactor" value="2000" /></th>
+          </tr>
+          <tr>
+            <th>Mie size parameter coefficient</th>
+            <th><input type="number" id="MieSizeParam" value="1" /></th>
+          </tr>
+        </table>
+
+        <h2>Diffusion Equation parameters</h2>
+        <table id="DEProp">
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+          <tr>
+            <th>Distance from source (m)</th>
+            <th><input type="number" id="SDD" value="0.005" /></th>
+          </tr>
+          <tr>
+            <th>Depth (semi-infinite)</th>
+            <th><input type="number" id="depth" value="0" /></th>
+          </tr>
+          <tr>
+            <th>Index of refraction</th>
+            <th><input type="number" id="ri" value="1.4" /></th>
+          </tr>
+          <tr>
+            <th>Input power (W)</th>
+            <th><input type="number" id="power" value="0.01" /></th>
+          </tr>
+        </table>
+
+      <div class="grid-container">
+        <div class="chart-area">
+          <canvas id="chart_mua_mus" width="10" height="5"></canvas>
+          <canvas id="chart_DE" width="10" height="5"></canvas>
+        </div>
+        <div class="options-area">
+          Options
+          <div>
+            <label for='wv_min'>Wavelength: Minimum:</label>
+            <input type="range" id="wv_min" value="0" onclick="changeWV()"/> 
+          </div>
+          <div>
+            <label for="wv_max">Maximum</label> 
+            <input type="range" id="wv_max" value="100" onclick="changeWV()"/>
+          </div>
+          Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
+          <button id='update'>Update graphs</button>
+        </div>
+      </div>
+      
+  
+  </body>
+  <script src="../js/tissue_DE.js"></script>
+</html>

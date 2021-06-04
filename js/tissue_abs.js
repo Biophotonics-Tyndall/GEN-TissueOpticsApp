@@ -1,88 +1,37 @@
-let absSpectra;
-let tissueChart;
-const button = document.getElementById('update');
+// JavaScript code for the page tissue_abs.html
+// Part of the TissueOpticsApp
+// Written by B. Jayet & J. S. Matias 
+// Adapted from a MATLAB based app by J. Gunther
 
+// Variable declaration
+let Spectra; // Variable containing the Spectra used in the app
+let tissueChart; // Variable pointing to the chart object
+
+// Initialise buttons to update the graph
+const button = document.getElementById('update');
 button.addEventListener('click', async event => {
     updateTissueChart();
 });
 
+// Operation donn when the page is opened
 getData()
     .then(response => {
         absSpectra = response;
-        chartData_chrom();
-        chartData_tissue()
+        plotSpectra_chrom();
+        plotSpectra_tissue()
             .then(response => {
                 tissueChart = response;
             });
     });
 
-function changeScale(){
-    const x = document.getElementById("check_log");
-    if (x.checked) {
-        tissueChart.options.scales.y.type = 'logarithmic';
-    } else {
-        tissueChart.options.scales.y.type = 'linear';
-    }
-    tissueChart.update();
+// Functions
+async function getData() { // Function to load all the data necessary for the application
+    const data = await fetch("ChromophoresAbsorptionSpectra.json");
+    const chrom = await data.json();
+    return chrom;
 }
 
-function updateTissueChart() {
-    const cBlood1 = document.getElementById('BloodConc_1').value;
-    const cWater1 = document.getElementById('WaterConc_1').value;
-    const cLipid1 = document.getElementById('LipidConc_1').value;
-    const Saturation1 = document.getElementById('BloodSat_1').value;
-    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,absSpectra);
-    tissueChart.data.datasets[0].data = absorption1;
-
-    const cBlood2 = document.getElementById('BloodConc_2').value;
-    const cWater2 = document.getElementById('WaterConc_2').value;
-    const cLipid2 = document.getElementById('LipidConc_2').value;
-    const Saturation2 = document.getElementById('BloodSat_2').value;
-    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,absSpectra);
-    tissueChart.data.datasets[1].data = absorption2;
-
-    const cBlood3 = document.getElementById('BloodConc_3').value;
-    const cWater3 = document.getElementById('WaterConc_3').value;
-    const cLipid3 = document.getElementById('LipidConc_3').value;
-    const Saturation3 = document.getElementById('BloodSat_3').value;
-    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,absSpectra);
-    tissueChart.data.datasets[2].data = absorption3;
-
-    let wv_min = parseInt(document.getElementById('wv_min').value);
-    let wv_max = parseInt(document.getElementById('wv_max').value);
-
-    if(wv_min < 260) {
-        wv_min = 260;
-        document.getElementById('wv_min').value = "260";
-    };
-    if(wv_max > 1580) {
-        wv_max = 1580;
-        document.getElementById('wv_min').value = "1580";
-    };
-
-    tissueChart.options.scales.x.min = wv_min;
-    tissueChart.options.scales.x.max = wv_max;
-    tissueChart.update();
-};
-async function getData() { // load the data for the absorption spectra 
-    const data = await fetch("absorptionSpectra.json");
-    const absSpectra_json = await data.json();
-    return absSpectra_json;
-}
-
-function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) {
-    const absorption = [];
-    const cHb = (cBlood*(1-Saturation/100))/100;
-    const cHbO = (cBlood*Saturation/100)/100;
-    var i;
-    for (i = 0; i < spectra.hb.length; i++) {
-        const abs = cHb*spectra.hb[i]+cHbO*spectra.hbo2[i]+cWater*spectra.water[i]/100+cLipid*spectra.lipid[i]/100;
-        absorption.push(abs);
-    }
-    return absorption;
-}
-
-async function chartData_tissue() {
+async function plotSpectra_tissue() { // Function to initiliase the plot of the tissue absorption
     const x = document.getElementById("check_log");
     x.checked = true;
 
@@ -90,19 +39,19 @@ async function chartData_tissue() {
     const cWater1 = document.getElementById('WaterConc_1').value;
     const cLipid1 = document.getElementById('LipidConc_1').value;
     const Saturation1 = document.getElementById('BloodSat_1').value;
-    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,absSpectra);
+    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,Spectra);
 
     const cBlood2 = document.getElementById('BloodConc_2').value;
     const cWater2 = document.getElementById('WaterConc_2').value;
     const cLipid2 = document.getElementById('LipidConc_2').value;
     const Saturation2 = document.getElementById('BloodSat_2').value;
-    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,absSpectra);
+    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,Spectra);
 
     const cBlood3 = document.getElementById('BloodConc_3').value;
     const cWater3 = document.getElementById('WaterConc_3').value;
     const cLipid3 = document.getElementById('LipidConc_3').value;
     const Saturation3 = document.getElementById('BloodSat_3').value;
-    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,absSpectra);
+    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,Spectra);
 
     const ctx = document.getElementById('chart_tissue').getContext('2d');
     const myChart = new Chart(ctx, {
@@ -160,7 +109,7 @@ async function chartData_tissue() {
     return myChart;
 }
 
-async function chartData_chrom() { // plot the data for the absorption spectra 
+async function plotSpectra_chrom() { // Function to initiliase the plot of the chromophore absorption
     const absSpectra = await getData();
 //    console.log(absSpectra);
     const ctx = document.getElementById('chart_chromophores').getContext('2d');
@@ -224,3 +173,67 @@ async function chartData_chrom() { // plot the data for the absorption spectra
         }
     });
 }
+
+function updateTissueChart() { // Function to update the chart
+    const cBlood1 = document.getElementById('BloodConc_1').value;
+    const cWater1 = document.getElementById('WaterConc_1').value;
+    const cLipid1 = document.getElementById('LipidConc_1').value;
+    const Saturation1 = document.getElementById('BloodSat_1').value;
+    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,Spectra);
+    tissueChart.data.datasets[0].data = absorption1;
+
+    const cBlood2 = document.getElementById('BloodConc_2').value;
+    const cWater2 = document.getElementById('WaterConc_2').value;
+    const cLipid2 = document.getElementById('LipidConc_2').value;
+    const Saturation2 = document.getElementById('BloodSat_2').value;
+    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,Spectra);
+    tissueChart.data.datasets[1].data = absorption2;
+
+    const cBlood3 = document.getElementById('BloodConc_3').value;
+    const cWater3 = document.getElementById('WaterConc_3').value;
+    const cLipid3 = document.getElementById('LipidConc_3').value;
+    const Saturation3 = document.getElementById('BloodSat_3').value;
+    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,Spectra);
+    tissueChart.data.datasets[2].data = absorption3;
+
+    let wv_min = parseInt(document.getElementById('wv_min').value);
+    let wv_max = parseInt(document.getElementById('wv_max').value);
+
+    if(wv_min < 260) {
+        wv_min = 260;
+        document.getElementById('wv_min').value = "260";
+    };
+    if(wv_max > 1580) {
+        wv_max = 1580;
+        document.getElementById('wv_min').value = "1580";
+    };
+
+    tissueChart.options.scales.x.min = wv_min;
+    tissueChart.options.scales.x.max = wv_max;
+    tissueChart.update();
+};
+
+function changeScale(){ // Function to change the scale from linear to logarithmic
+    const x = document.getElementById("check_log");
+    if (x.checked) {
+        tissueChart.options.scales.y.type = 'logarithmic';
+    } else {
+        tissueChart.options.scales.y.type = 'linear';
+    }
+    tissueChart.update();
+}
+
+function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to calculate the absorption spectrum of the tissue
+    const absorption = [];
+    const cHb = (cBlood*(1-Saturation/100))/100;
+    const cHbO = (cBlood*Saturation/100)/100;
+    var i;
+    for (i = 0; i < spectra.hb.length; i++) {
+        const abs = cHb*spectra.hb[i]+cHbO*spectra.hbo2[i]+cWater*spectra.water[i]/100+cLipid*spectra.lipid[i]/100;
+        absorption.push(abs);
+    }
+    return absorption;
+}
+
+
+

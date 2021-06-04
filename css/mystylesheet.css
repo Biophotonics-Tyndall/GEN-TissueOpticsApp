@@ -12,9 +12,10 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    margin: auto;
+    margin: auto auto 50px 250px;
     margin-top: 50px;
-    max-width: 800px;
+    margin-bottom: 110px;
+    max-width: 1000px;
     color: #666666;
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
@@ -22,6 +23,9 @@ body {
     font-weight: normal;
     overflow-x: hidden;
 }
+/* input, label {
+    display:block;
+} */
 a {
     color: #1f1f1f;
     text-decoration: none !important;
@@ -105,6 +109,66 @@ img {
     max-width: 100%;
     height: auto;
 }
+.grid-container{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+.options-area{
+    background: lightgray;
+}
+
+.footer {
+    position: fixed;
+    padding: 20px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #161616;
+    color: white;
+    text-align: center;
+}
+.navbar-title{
+    padding: 10px;
+    text-transform: uppercase;
+    border-style: solid;
+    margin-bottom: 40px;
+}
+.navbar-menu{
+    padding-top: 5px;
+}
+.navbar-item{
+    border-bottom-style: outset;
+    /* height: 57px; */
+}
+.navbar-item a {
+    color: white;
+    padding: 5px;
+}
+.navbar-item a:hover{
+    color: #0fb0d3;
+}
+.navbar-item a, .btn {
+    text-decoration: none !important;
+    outline: none !important;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.navbar {
+    position: fixed;
+    padding: 20px;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #161616;
+    color: white;
+    text-align: center;
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -1416,10 +1480,10 @@ transition: all 0.3s ease-in;
 
 
 /** footer **/
-.footer {
+/* .footer {
     background: #161616;
     margin-top: 90px;
-}
+} */
 .news h3 {
    color: #fff;
 font-size: 20px;

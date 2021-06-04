@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Effective attenuation</title>
+    <meta name="author (adaptation to JavaScript)" content="Baptiste Jayet">
+    <meta name="author (adaptation to JavaScript)" content="Jean S. Matias">
+    <meta name="author (original MATLAB code)" content="Jacqueline Gunther">
+    <meta name="description" content="description here">
+    <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="../css/mystylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
+  </head>
+<!--
+
+      <div class="grid-container">
+        <div class="chart-area">
+          some nice chart
+        </div>
+        <div class="options-area">
+          Options
+        </div>
+      </div> -->
+  <body>
+      <script src="components/layout.js"></script>
+      <h1>Tissue effective attenuation</h1>
+      <p><a href="../index.html">Back to app choice</a><br /></p>
+      <h2>Tissue properties</h2>
+      <table id="TissueProp">
+        <tr>
+          <th></th>
+          <th>Your tissue</th>
+        </tr>
+        <tr>
+          <th>Blood Concentration</th>
+          <th><input type="number" id="BloodConc" value="5" /></th>
+        </tr>
+        <tr>
+          <th>Blood saturation</th>
+          <th><input type="number" id="BloodSat" value="60" /></th>
+        </tr>
+        <tr>
+          <th>Water concentration</th>
+          <th><input type="number" id="WaterConc" value="65" /></th>
+        </tr>
+        <tr>
+          <th>Lipid concentration</th>
+          <th><input type="number" id="LipidConc" value="15" /></th>
+        </tr>
+
+        <h2>Scattering properties</h2>
+        <table id="ScatProp">
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+          <tr>
+            <th>Rayleigh scattering probability factor</th>
+            <th><input type="number" id="RayProbFactor" value="500" /></th>
+          </tr>
+          <tr>
+            <th>Mie scattering probability factor</th>
+            <th><input type="number" id="MieProbFactor" value="2000" /></th>
+          </tr>
+          <tr>
+            <th>Mie size parameter coefficient</th>
+            <th><input type="number" id="MieSizeParam" value="1" /></th>
+          </tr>
+        </table>
+
+        <h4>Display options</h4>
+        <div>
+          <label for='wv_min'>Wavelength: Minimum:</label>
+          <input type="number" id="wv_min" value="260" /> 
+        </div>
+        <div>
+          <label for="wv_max">Maximum</label> 
+          <input type="number" id="wv_max" value="1580" />
+        </div>
+        Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
+        <button id='update'>Update</button>
+
+      <canvas id="chart_mua_mus" width="10" height="5"></canvas>
+      <canvas id="chart_mueff" width="10" height="5"></canvas>
+
+      <div class="footer">
+        <p>Tissue Optic App</p>
+        <div>Developed by: B. Jayet and J.S. Matias</div>
+      </div>
+  </body>
+  <script src="../js/tissue_mueff.js"></script>
+</html>
