@@ -32,19 +32,19 @@ async function plotSpectra_tissue() { // Function to initiliase the plot of the 
     const cWater1 = document.getElementById('WaterConc_1').value;
     const cLipid1 = document.getElementById('LipidConc_1').value;
     const Saturation1 = document.getElementById('BloodSat_1').value;
-    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,absSpectra);
+    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,Spectra);
 
     const cBlood2 = document.getElementById('BloodConc_2').value;
     const cWater2 = document.getElementById('WaterConc_2').value;
     const cLipid2 = document.getElementById('LipidConc_2').value;
     const Saturation2 = document.getElementById('BloodSat_2').value;
-    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,absSpectra);
+    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,Spectra);
 
     const cBlood3 = document.getElementById('BloodConc_3').value;
     const cWater3 = document.getElementById('WaterConc_3').value;
     const cLipid3 = document.getElementById('LipidConc_3').value;
     const Saturation3 = document.getElementById('BloodSat_3').value;
-    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,absSpectra);
+    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,Spectra);
 
     const ctx = document.getElementById('chart_tissue').getContext('2d');
     const myChart = new Chart(ctx, {
@@ -172,21 +172,21 @@ function updateTissueChart() { // Function to update the chart
     const cWater1 = document.getElementById('WaterConc_1').value;
     const cLipid1 = document.getElementById('LipidConc_1').value;
     const Saturation1 = document.getElementById('BloodSat_1').value;
-    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,absSpectra);
+    const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,Spectra);
     tissueChart.data.datasets[0].data = absorption1;
 
     const cBlood2 = document.getElementById('BloodConc_2').value;
     const cWater2 = document.getElementById('WaterConc_2').value;
     const cLipid2 = document.getElementById('LipidConc_2').value;
     const Saturation2 = document.getElementById('BloodSat_2').value;
-    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,absSpectra);
+    const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,Spectra);
     tissueChart.data.datasets[1].data = absorption2;
 
     const cBlood3 = document.getElementById('BloodConc_3').value;
     const cWater3 = document.getElementById('WaterConc_3').value;
     const cLipid3 = document.getElementById('LipidConc_3').value;
     const Saturation3 = document.getElementById('BloodSat_3').value;
-    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,absSpectra);
+    const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,Spectra);
     tissueChart.data.datasets[2].data = absorption3;
 
     let wv_min = parseInt(document.getElementById('wv_min').value);

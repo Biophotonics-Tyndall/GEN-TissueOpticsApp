@@ -8,7 +8,7 @@ button_update.addEventListener('click', async event => {
     updateTissueChart();
 });
 
-// Initialise buttons to selete the reference spectra
+// Initialise buttons to select the reference spectra
 const button_refSpec = document.getElementById('selectRefSpec');
 button_refSpec.addEventListener('click', async event => {
     changeRefSpectrum();
