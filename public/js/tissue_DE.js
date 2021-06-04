@@ -248,8 +248,8 @@ function changeWV() { // Function to react to the modification of the wavelength
     wv_minSlide = 13.20*minSlidePos+260;
     wv_maxSlide = 13.20*maxSlidePos+260;
 
-    wv_min = Math.min(wv_minSlide,wv_maxSlide)
-    wv_max = Math.max(wv_minSlide,wv_maxSlide)
+    wv_min = Math.min(wv_minSlide,wv_maxSlide);
+    wv_max = Math.max(wv_minSlide,wv_maxSlide);
     muChart.options.scales.x.min = wv_min;
     muChart.options.scales.x.max = wv_max;
     muChart.update();
