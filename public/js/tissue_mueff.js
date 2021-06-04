@@ -1,5 +1,6 @@
 let Spectra; // Variable containing the Spectra used in the app
 let muChart;
+let mueffChart;
 
 // Initialise buttons to update the graph
 const button = document.getElementById('update');
@@ -13,8 +14,11 @@ getData()
         plotMuaMus()
             .then(response => {
                 muChart = response;
+                plotMueff()
+                    .then(response => {
+                    mueffChart = response;
+                    });
             });
-       //plotMueff();
     });
 
 
@@ -37,6 +41,7 @@ async function plotMuaMus() {
     const a_Mie = document.getElementById('MieProbFactor').value;
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
+
     const ctx = document.getElementById('chart_mua_mus').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -98,6 +103,61 @@ async function plotMuaMus() {
     return myChart;
 }
 
+async function plotMueff() {
+    const cBlood = document.getElementById('BloodConc').value;
+    const cWater = document.getElementById('WaterConc').value;
+    const cLipid = document.getElementById('LipidConc').value;
+    const Saturation = document.getElementById('BloodSat').value;
+    const mua = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra);
+
+    const a_Rayleigh = document.getElementById('RayProbFactor').value;
+    const a_Mie = document.getElementById('MieProbFactor').value;
+    const b_Mie = document.getElementById('MieSizeParam').value;
+    const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
+
+    const mueff = calcTissueMueff(mua,mus);
+
+    const ctx = document.getElementById('chart_mueff').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Spectra.wavelength,
+            datasets: [
+                {
+                    label: 'Effective absorption',
+                    data: mueff,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            elements:{
+                point: {
+                    radius: 0
+                }
+            },
+            scales: {
+                y: {
+                    type: 'logarithmic',
+                    title: {
+                        display: 'true',
+                        text: 'Effective Absorption'
+                    },
+                },
+                x: {
+                    title: {
+                        display: 'true',
+                        text: 'Wavelength (nm)'
+                    }
+                }
+            }
+        }
+    });
+    return myChart;
+}
+
 function updateCharts() { // Function to update the chart ADD THE UPDATE OF THE OTHER CHART
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
@@ -111,6 +171,10 @@ function updateCharts() { // Function to update the chart ADD THE UPDATE OF THE 
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
     muChart.data.datasets[1].data = mus;
+
+    const mueff = calcTissueMueff(absorption,mus);
+    console.log(mueff)
+    mueffChart.data.datasets[0].data = mueff;
 
     let wv_min = parseInt(document.getElementById('wv_min').value);
     let wv_max = parseInt(document.getElementById('wv_max').value);
@@ -127,6 +191,10 @@ function updateCharts() { // Function to update the chart ADD THE UPDATE OF THE 
     muChart.options.scales.x.min = wv_min;
     muChart.options.scales.x.max = wv_max;
     muChart.update();
+
+    mueffChart.options.scales.x.min = wv_min;
+    mueffChart.options.scales.x.max = wv_max;
+    mueffChart.update();
 };
 
 function changeScale(){ // Function to change the scale from linear to logarithmic
