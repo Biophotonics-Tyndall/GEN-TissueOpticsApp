@@ -8,13 +8,6 @@ let Spectra; // Variable containing the Spectra used in the app
 let muChart; // Variable pointing to the chart object containing mua and mus
 let DEChart; // Variable pointing to the chart object containing the diffusion equation results
 
-// Initialise buttons to update the graph
-// We don't really neer the button, but it seems you're using the element somehow, so I kept it. 
-const button = document.getElementById('update');
-button.addEventListener('click', async event => {
-    updateCharts();
-});
-
 // Operation donn when the page is opened
 getData()
     .then(response => {
@@ -246,8 +239,8 @@ function changeWV() { // Function to react to the modification of the wavelength
     let minSlidePos = parseInt(document.getElementById('wv_min').value);
     let maxSlidePos = parseInt(document.getElementById('wv_max').value);
 
-    wv_minSlide = 13.20*minSlidePos+260;
-    wv_maxSlide = 13.20*maxSlidePos+260;
+    let wv_minSlide = 13.20*minSlidePos+260;
+    let wv_maxSlide = 13.20*maxSlidePos+260;
 
     var min_label = document.getElementById("min_label");
     var max_label = document.getElementById("max_label");
@@ -261,8 +254,9 @@ function changeWV() { // Function to react to the modification of the wavelength
         max_label.innerHTML = wv_maxSlide.toFixed(1);
     }
 
-    wv_min = Math.min(wv_minSlide,wv_maxSlide);
-    wv_max = Math.max(wv_minSlide,wv_maxSlide);
+    let wv_min = Math.round(Math.min(wv_minSlide,wv_maxSlide));
+    let wv_max = Math.round(Math.max(wv_minSlide,wv_maxSlide));
+
     muChart.options.scales.x.min = wv_min;
     muChart.options.scales.x.max = wv_max;
     muChart.update();
