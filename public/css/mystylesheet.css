@@ -12,10 +12,9 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    margin: auto auto 50px 250px;
-    margin-top: 50px;
-    margin-bottom: 110px;
-    max-width: 1000px;
+    /* margin: 20px auto 80px 200px; */
+    margin: auto;
+    /* max-width: 1200px; */
     color: #666666;
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
@@ -109,14 +108,47 @@ img {
     max-width: 100%;
     height: auto;
 }
-.grid-container{
+.title-container{
+    padding: 1rem;
+}
+.app{
+    margin: auto auto 80px 200px;
+    /* position: fixed;
+    left: 200px;
+    width: 100%; */
+    /* height: 100%; */
+}
+.app-container{
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 3fr;
+    /* height: 100%; */
+    /* width: 100%; */
+    /* position: relative; */
 }
-.options-area{
+.input-area{
     background: lightgray;
+    padding: 1rem;
 }
-
+.chart-container{
+    background: #f6fdff;
+    padding: 1rem;
+    /* position: relative; */
+}
+.chart-display-options{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1rem;
+    width: 100%;
+    height: 80px;
+    background: lightgray;
+    /* position: absolute;
+    left: 0;
+    bottom: 0; */
+}
+.property{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
 .footer {
     position: fixed;
     padding: 20px;
@@ -127,6 +159,7 @@ img {
     background-color: #161616;
     color: white;
     text-align: center;
+    z-index: 1000;
 }
 .navbar-title{
     padding: 10px;
@@ -139,6 +172,8 @@ img {
 }
 .navbar-item{
     border-bottom-style: outset;
+    padding-top: 10px;
+    padding-bottom: 10px;
     /* height: 57px; */
 }
 .navbar-item a {
@@ -158,6 +193,7 @@ img {
     transition: all .3s ease-in-out;
 }
 .navbar {
+    z-index: 1000;
     position: fixed;
     padding: 20px;
     left: 0;

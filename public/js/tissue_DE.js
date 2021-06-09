@@ -9,6 +9,7 @@ let muChart; // Variable pointing to the chart object containing mua and mus
 let DEChart; // Variable pointing to the chart object containing the diffusion equation results
 
 // Initialise buttons to update the graph
+// We don't really neer the button, but it seems you're using the element somehow, so I kept it. 
 const button = document.getElementById('update');
 button.addEventListener('click', async event => {
     updateCharts();
@@ -247,6 +248,18 @@ function changeWV() { // Function to react to the modification of the wavelength
 
     wv_minSlide = 13.20*minSlidePos+260;
     wv_maxSlide = 13.20*maxSlidePos+260;
+
+    var min_label = document.getElementById("min_label");
+    var max_label = document.getElementById("max_label");
+    min_label.innerHTML = wv_minSlide.toFixed(1);
+    max_label.innerHTML = wv_maxSlide.toFixed(1);
+
+    minSlidePos.oninput = function() {
+        min_label.innerHTML = wv_minSlide.toFixed(1);
+    }
+    maxSlidePos.oninput = function() {
+        max_label.innerHTML = wv_maxSlide.toFixed(1);
+    }
 
     wv_min = Math.min(wv_minSlide,wv_maxSlide);
     wv_max = Math.max(wv_minSlide,wv_maxSlide);

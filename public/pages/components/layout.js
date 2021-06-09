@@ -7,6 +7,7 @@ document.write(`
             Tissue Optics App
         </div class="navbar-menu">
             <div class="navbar-item"><a href="../index.html">Home</a></div>
+            <div class="navbar-item"><a href="${root}layout.html">Layout template</a></div>
             <div class="navbar-item"><a href="${root}tissue_abs.html">Tissue absorption</a></div>
             <div class="navbar-item"><a href="${root}tissue_abs_inv.html">Inverse tissue absorption</a></div>
             <div class="navbar-item"><a href="${root}tissue_mueff.html">Effective attenuation coefficient</a></div>
