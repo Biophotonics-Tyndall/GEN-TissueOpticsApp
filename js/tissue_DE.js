@@ -8,12 +8,6 @@ let Spectra; // Variable containing the Spectra used in the app
 let muChart; // Variable pointing to the chart object containing mua and mus
 let DEChart; // Variable pointing to the chart object containing the diffusion equation results
 
-// Initialise buttons to update the graph
-const button = document.getElementById('update');
-button.addEventListener('click', async event => {
-    updateCharts();
-});
-
 // Operation donn when the page is opened
 getData()
     .then(response => {
@@ -245,11 +239,24 @@ function changeWV() { // Function to react to the modification of the wavelength
     let minSlidePos = parseInt(document.getElementById('wv_min').value);
     let maxSlidePos = parseInt(document.getElementById('wv_max').value);
 
-    wv_minSlide = 13.20*minSlidePos+260;
-    wv_maxSlide = 13.20*maxSlidePos+260;
+    let wv_minSlide = 13.20*minSlidePos+260;
+    let wv_maxSlide = 13.20*maxSlidePos+260;
 
-    wv_min = Math.min(wv_minSlide,wv_maxSlide);
-    wv_max = Math.max(wv_minSlide,wv_maxSlide);
+    var min_label = document.getElementById("min_label");
+    var max_label = document.getElementById("max_label");
+    min_label.innerHTML = wv_minSlide.toFixed(1);
+    max_label.innerHTML = wv_maxSlide.toFixed(1);
+
+    minSlidePos.oninput = function() {
+        min_label.innerHTML = wv_minSlide.toFixed(1);
+    }
+    maxSlidePos.oninput = function() {
+        max_label.innerHTML = wv_maxSlide.toFixed(1);
+    }
+
+    let wv_min = Math.round(Math.min(wv_minSlide,wv_maxSlide));
+    let wv_max = Math.round(Math.max(wv_minSlide,wv_maxSlide));
+
     muChart.options.scales.x.min = wv_min;
     muChart.options.scales.x.max = wv_max;
     muChart.update();
