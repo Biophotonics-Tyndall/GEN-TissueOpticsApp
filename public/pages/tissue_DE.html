@@ -59,15 +59,15 @@
         <h2>Diffusion Equation parameters</h2>
         <div class="property">
           <label for="SDD">Distance from source (m)</label>
-          <input type="number" id="SDD" value="0.005" onchange="updateCharts()"/>
+          <input type="number" id="SDD" value="0.005" step="0.001" onchange="updateCharts()"/>
         </div>
         <div class="property">
           <label for="depth">Depth (semi-infinite)</label>
-          <input type="number" id="depth" value="0.005" onchange="updateCharts()"/>
+          <input type="number" id="depth" value="0.005" step="0.001" onchange="updateCharts()"/>
         </div>
         <div class="property">
           <label for="ri">Depth (semi-infinite)</label>
-          <input type="number" id="ri" value="0" onchange="updateCharts()"/>
+          <input type="number" id="ri" value="0" step="1" onchange="updateCharts()"/>
         </div>
         <div class="property">
           <label for="ri">Index of refraction</label>
@@ -75,7 +75,7 @@
         </div>
         <div class="property">
           <label for="power">Input power (W)</label>
-          <input type="number" id="power" value="0.01" onchange="updateCharts()"/>
+          <input type="number" id="power" value="0.01" step="0.01" onchange="updateCharts()"/>
         </div>
         
         <button id='update'>Update graphs</button>
