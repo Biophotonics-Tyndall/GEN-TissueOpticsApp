@@ -244,14 +244,14 @@ function changeWV() { // Function to react to the modification of the wavelength
 
     var min_label = document.getElementById("min_label");
     var max_label = document.getElementById("max_label");
-    min_label.innerHTML = wv_minSlide.toFixed(1);
-    max_label.innerHTML = wv_maxSlide.toFixed(1);
+    min_label.innerHTML = wv_minSlide.toFixed(0);
+    max_label.innerHTML = wv_maxSlide.toFixed(0);
 
     minSlidePos.oninput = function() {
-        min_label.innerHTML = wv_minSlide.toFixed(1);
+        min_label.innerHTML = wv_minSlide.toFixed(0);
     }
     maxSlidePos.oninput = function() {
-        max_label.innerHTML = wv_maxSlide.toFixed(1);
+        max_label.innerHTML = wv_maxSlide.toFixed(0);
     }
 
     let wv_min = Math.round(Math.min(wv_minSlide,wv_maxSlide));

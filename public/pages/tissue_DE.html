@@ -84,24 +84,28 @@
             <canvas id="chart_mua_mus" width="10" height="5"></canvas>
             <canvas id="chart_DE" width="10" height="5"></canvas>
           </div>
-          <div class="chart-display-options">
-            <div class="property">
-              <label for='wv_min'>Minimum Wavelength: <span id="min_label">0</span></label>
-              <input type="range" id="wv_min" value="0" onclick="changeWV()"/> 
-            </div>
-            <div class="property">
-              <label for="wv_max">Maximum Wavelength: <span id="max_label">100</span></label> 
-              <input type="range" id="wv_max" value="100" onclick="changeWV()"/>
-            </div>
-            <div class="property">
-              <label for="check_log">Log Scale</label>
-              <input type="checkbox" id='check_log' onclick="changeScale()">
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
-
+    <div class="options-area">
+      <span class="empty"></span>
+      <div class="chart-display-options">
+        <div class="property">
+          <!-- the value 260 and 1580 should be in the JS -->
+          <label for='wv_min'>Minimum Wavelength: <span id="min_label">260</span></label>
+          <input type="range" id="wv_min" value="0" onclick="changeWV()"/> 
+        </div>
+        <div class="property">
+          <label for="wv_max">Maximum Wavelength: <span id="max_label">1580</span></label> 
+          <input type="range" id="wv_max" value="100" onclick="changeWV()"/>
+        </div>
+        <div class="property">
+          <label for="check_log">Log Scale</label>
+          <input type="checkbox" id='check_log' onclick="changeScale()">
+        </div>
+      </div>
+    </div>
   </body>
   <script src="../js/tissue_DE.js"></script>
 </html>
