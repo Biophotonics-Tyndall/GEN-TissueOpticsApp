@@ -15,56 +15,63 @@
   </head>
   <body>
     <script src="components/layout.js"></script>
-      <h1>Inverse tissue absorption</h1>
 
-      <h2>Match the spectrum</h2>
-      <p>
-        <table id="TissueProp">
-          <tr>
-            <th></th>
-            <th>Your tissue</th>
-          </tr>
-          <tr>
-            <th>Blood Concentration</th>
-            <th><input type="number" id="BloodConc" value="5" /></th>
-          </tr>
-          <tr>
-            <th>Blood saturation</th>
-            <th><input type="number" id="BloodSat" value="60" /></th>
-          </tr>
-          <tr>
-            <th>Water concentration</th>
-            <th><input type="number" id="WaterConc" value="65" /></th>
-          </tr>
-          <tr>
-            <th>Lipid concentration</th>
-            <th><input type="number" id="LipidConc" value="15" /></th>
-          </tr>
-        </table>
-
-        Choose a reference spectrum (number between 1 and 21): 
-        <input type="number" id="refSpecNumber" value="1" /> 
-        <button id='selectRefSpec'>Select</button>
-
-        <h4>Display options</h4>
-        <div>
-          <label for='wv_min'>Wavelength: Minimum:</label>
-          <input type="number" id="wv_min" value="260" /> 
+    <div class="app">
+      <div class="title-container">
+        <h1>Inverse tissue absorption</h1>
+      </div>
+      <div class="app-container">
+        <div class="input-area">
+          <h2>Reference spectrum (Between 1 and 21):</h2> 
+          <div class="property">
+            <input type="number" id="refSpecNumber" value="1" onchange="changeRefSpectrum()"/>
+          </div>
+           
+          <h2>Match the spectrum</h2>
+          <div class="property">
+            <label for="BloodConc">Blood Concentration</label>
+            <input type="number" id="BloodConc" value="5" onchange="updateTissueChart()"/>
+          </div>
+          <div class="property">
+            <label for="BloodSat">Blood Saturation</label>
+            <input type="number" id="BloodSat" value="60" onchange="updateTissueChart()"/>
+          </div>
+          <div class="property">
+            <label for="WaterConc">Water Concentration</label>
+            <input type="number" id="WaterConc" value="65" onchange="updateTissueChart()"/>
+          </div>
+          <div class="property">
+            <label for="LipidConc">Lipid Concentration</label>
+            <input type="number" id="LipidConc" value="15" onchange="updateTissueChart()"/>
+          </div>
         </div>
-        <div>
-          <label for="wv_max">Maximum</label> 
-          <input type="number" id="wv_max" value="1580" />
+
+        <div class="chart-container">
+          <div class="chart-area">
+            <canvas id="chart_spectra" width="10" height="5"></canvas>
+          </div>
         </div>
-        Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
-        <button id='update'>Update</button>
-      </p>
-      <canvas id="chart_spectra" width="10" height="5"></canvas>
-  
-    <div class="footer">
-      <p>Tissue Optic App</p>
-      <div>Developed by: B. Jayet and J.S. Matias</div>
+
+      </div>
     </div>
-
+    <div class="options-area">
+      <span class="empty"></span>
+      <div class="chart-display-options">
+        <div class="property">
+          <!-- the value 260 and 1580 should be in the JS -->
+          <label for='wv_min'>Minimum Wavelength: <span id="min_label">260</span></label>
+          <input type="range" id="wv_min" value="0" onclick="changeWV()"/> 
+        </div>
+        <div class="property">
+          <label for="wv_max">Maximum Wavelength: <span id="max_label">1580</span></label> 
+          <input type="range" id="wv_max" value="100" onclick="changeWV()"/>
+        </div>
+        <div class="property">
+          <label for="check_log">Log Scale</label>
+          <input type="checkbox" id='check_log' onclick="changeScale()">
+        </div>
+      </div>
+    </div>
   </body>
   <script src="../js/tissue_abs_inv.js"></script>
 </html>

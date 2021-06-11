@@ -30,6 +30,9 @@ async function getData() { // Function to load all the necessary data
 }
 
 async function plotMuaMus() { // Function to plot the graph with mua and mus
+    const x = document.getElementById("check_log");
+    x.checked = true;
+
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
@@ -78,7 +81,7 @@ async function plotMuaMus() { // Function to plot the graph with mua and mus
                     min: 10,
                     title: {
                         display: 'true',
-                        text: 'Absorption'
+                        text: 'Absorption  (1/m)'
                     },
                 },
                 y_scat: {
@@ -87,7 +90,7 @@ async function plotMuaMus() { // Function to plot the graph with mua and mus
                     min: 0.01,
                     title: {
                         display: 'true',
-                        text: 'Scattering'
+                        text: 'Scattering  (1/m)'
                     },
                 },
                 x: {
@@ -244,14 +247,14 @@ function changeWV() { // Function to react to the modification of the wavelength
 
     var min_label = document.getElementById("min_label");
     var max_label = document.getElementById("max_label");
-    min_label.innerHTML = wv_minSlide.toFixed(1);
-    max_label.innerHTML = wv_maxSlide.toFixed(1);
+    min_label.innerHTML = wv_minSlide.toFixed(0);
+    max_label.innerHTML = wv_maxSlide.toFixed(0);
 
     minSlidePos.oninput = function() {
-        min_label.innerHTML = wv_minSlide.toFixed(1);
+        min_label.innerHTML = wv_minSlide.toFixed(0);
     }
     maxSlidePos.oninput = function() {
-        max_label.innerHTML = wv_maxSlide.toFixed(1);
+        max_label.innerHTML = wv_maxSlide.toFixed(0);
     }
 
     let wv_min = Math.round(Math.min(wv_minSlide,wv_maxSlide));
@@ -374,4 +377,14 @@ function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to
         absorption.push(abs);
     }
     return absorption;
+}
+
+function changeScale(){ // Function to change the scale from linear to logarithmic
+    const x = document.getElementById("check_log");
+    if (x.checked) {
+        muChart.options.scales.y_abs.type = 'logarithmic';
+    } else {
+        muChart.options.scales.y_abs.type = 'linear';
+    }
+    muChart.update();
 }

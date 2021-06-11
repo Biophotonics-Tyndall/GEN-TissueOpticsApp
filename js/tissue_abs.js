@@ -7,16 +7,10 @@
 let Spectra; // Variable containing the Spectra used in the app
 let tissueChart; // Variable pointing to the chart object
 
-// Initialise buttons to update the graph
-const button = document.getElementById('update');
-button.addEventListener('click', async event => {
-    updateTissueChart();
-});
-
 // Operation donn when the page is opened
 getData()
     .then(response => {
-        absSpectra = response;
+        Spectra = response;
         plotSpectra_chrom();
         plotSpectra_tissue()
             .then(response => {
@@ -57,7 +51,7 @@ async function plotSpectra_tissue() { // Function to initiliase the plot of the 
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: absSpectra.wavelength,
+            labels: Spectra.wavelength,
             datasets: [
                 {
                     label: 'Tissue 1',
@@ -110,38 +104,38 @@ async function plotSpectra_tissue() { // Function to initiliase the plot of the 
 }
 
 async function plotSpectra_chrom() { // Function to initiliase the plot of the chromophore absorption
-    const absSpectra = await getData();
+ //   const absSpectra = await getData();
 //    console.log(absSpectra);
     const ctx = document.getElementById('chart_chromophores').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: absSpectra.wavelength,
+            labels: Spectra.wavelength,
             datasets: [
                 {
                     label: 'HbO2',
-                    data: absSpectra.hbo2,
+                    data: Spectra.hbo2,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {   
                     label: 'Hb',
-                    data: absSpectra.hb,
+                    data: Spectra.hb,
                     backgroundColor: 'rgba(99, 132, 255, 0.2)',
                     borderColor: 'rgba(99, 132, 255, 1)',
                     borderWidth: 1
                 },
                 {   
                     label: 'Water',
-                    data: absSpectra.water,
+                    data: Spectra.water,
                     backgroundColor: 'rgba(99, 0, 255, 0.2)',
                     borderColor: 'rgba(99, 0, 255, 1)',
                     borderWidth: 1
                 },
                 {   
                     label: 'Lipids',
-                    data: absSpectra.lipid,
+                    data: Spectra.lipid,
                     backgroundColor: 'rgba(99, 132, 0, 0.2)',
                     borderColor: 'rgba(99, 132, 0, 1)',
                     borderWidth: 1
@@ -160,7 +154,7 @@ async function plotSpectra_chrom() { // Function to initiliase the plot of the c
                     min: 0.01,
                     title: {
                         display: 'true',
-                        text: 'Absorption'
+                        text: 'Absorption  (1/m)'
                     },
                 },
                 x: {
@@ -196,20 +190,6 @@ function updateTissueChart() { // Function to update the chart
     const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,Spectra);
     tissueChart.data.datasets[2].data = absorption3;
 
-    let wv_min = parseInt(document.getElementById('wv_min').value);
-    let wv_max = parseInt(document.getElementById('wv_max').value);
-
-    if(wv_min < 260) {
-        wv_min = 260;
-        document.getElementById('wv_min').value = "260";
-    };
-    if(wv_max > 1580) {
-        wv_max = 1580;
-        document.getElementById('wv_min').value = "1580";
-    };
-
-    tissueChart.options.scales.x.min = wv_min;
-    tissueChart.options.scales.x.max = wv_max;
     tissueChart.update();
 };
 
@@ -235,5 +215,30 @@ function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to
     return absorption;
 }
 
+function changeWV() { // Function to react to the modification of the wavelength sliders
+    let minSlidePos = parseInt(document.getElementById('wv_min').value);
+    let maxSlidePos = parseInt(document.getElementById('wv_max').value);
 
+    let wv_minSlide = 13.20*minSlidePos+260;
+    let wv_maxSlide = 13.20*maxSlidePos+260;
+
+    var min_label = document.getElementById("min_label");
+    var max_label = document.getElementById("max_label");
+    min_label.innerHTML = wv_minSlide.toFixed(0);
+    max_label.innerHTML = wv_maxSlide.toFixed(0);
+
+    minSlidePos.oninput = function() {
+        min_label.innerHTML = wv_minSlide.toFixed(0);
+    }
+    maxSlidePos.oninput = function() {
+        max_label.innerHTML = wv_maxSlide.toFixed(0);
+    }
+
+    let wv_min = Math.round(Math.min(wv_minSlide,wv_maxSlide));
+    let wv_max = Math.round(Math.max(wv_minSlide,wv_maxSlide));
+
+    tissueChart.options.scales.x.min = wv_min;
+    tissueChart.options.scales.x.max = wv_max;
+    tissueChart.update();
+}
 

@@ -5,78 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Tissue absorption</title>
-    <meta name="author" content="name">
+    <meta name="author (adaptation to JavaScript)" content="Baptiste Jayet">
+    <meta name="author (adaptation to JavaScript)" content="Jean S. Matias">
+    <meta name="author (original MATLAB code)" content="Jacqueline Gunther">
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
     <link rel="stylesheet" href="../css/mystylesheet.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
   </head>
   <body>
-      <script src="components/layout.js"></script>
-      <h1>Tissue absorption</h1>
+    <script src="components/layout.js"></script>
 
-      <h2>Absorption spectra of different tissue</h2>
-      <p>
-        <h3>Make your own tissue by changing the parameters of the tissues</h3>
-        <div>
-          <table id="TissueProp" class="styled-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Tissue 1</th>
-                <th>Tissue 2</th>
-                <th>Tissue 3</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Blood Concentration</th>
-                <th><input id="BloodConc_1" value="5" /></th>
-                <th><input id="BloodConc_2" value="5" /></th>
-                <th><input id="BloodConc_3" value="5" /></th>
-              </tr>
-              <tr>
-                <th>Blood saturation</th>
-                <th><input id="BloodSat_1" value="60" /></th>
-                <th><input id="BloodSat_2" value="75" /></th>
-                <th><input id="BloodSat_3" value="90" /></th>
-              </tr>
-              <tr>
-                <th>Water concentration</th>
-                <th><input id="WaterConc_1" value="65" /></th>
-                <th><input id="WaterConc_2" value="65" /></th>
-                <th><input id="WaterConc_3" value="65" /></th>
-              </tr>
-              <tr>
-                <th>Lipid concentration</th>
-                <th><input id="LipidConc_1" value="15" /></th>
-                <th><input id="LipidConc_2" value="15" /></th>
-                <th><input id="LipidConc_3" value="15" /></th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h4>Display options</h4>
-        <div>
-          Wavelength: Minimum: <input id="wv_min" value="260" /> Maximum <input id="wv_max" value="1580" />
-        </div>
-        <div>
-          Log Scale: <input type="checkbox" id='check_log' onclick="changeScale()"><br />
-        </div>
-        <button id='update'>Update</button>
-      </p>
-      <canvas id="chart_tissue" width="10" height="5"></canvas>
-
-      <h2>
-        Absorption spectra of different chromophores
-      </h2>
-      <canvas id="chart_chromophores" width="400" height="200"></canvas>
-      
-      <div class="footer">
-        <p>Tissue Optic App</p>
-        <div>Developed by: B. Jayet and J.S. Matias</div>
+    <div class="app">
+      <div class="title-container">
+        <h1>Tissue absorption</h1>
       </div>
-      <script src="../js/tissue_abs.js"></script>
+      <div class="app-container">
+        <div class="input-area">
+          <h2>Absorption spectra of different tissue</h2>
+          <div>
+            <table id="TissueProp" class="styled-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Tissue 1</th>
+                  <th>Tissue 2</th>
+                  <th>Tissue 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Blood Concentration</th>
+                  <th><input type="number" id="BloodConc_1" value="5" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="BloodConc_2" value="5" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="BloodConc_3" value="5" size="5" onchange="updateTissueChart()"/></th>
+                </tr>
+                <tr>
+                  <th>Blood saturation</th>
+                  <th><input type="number" id="BloodSat_1" value="60" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="BloodSat_2" value="75" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="BloodSat_3" value="90" size="5" onchange="updateTissueChart()"/></th>
+                </tr>
+                <tr>
+                  <th>Water concentration</th>
+                  <th><input type="number" id="WaterConc_1" value="65" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="WaterConc_2" value="65" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="WaterConc_3" value="65" size="5" onchange="updateTissueChart()"/></th>
+                </tr>
+                <tr>
+                  <th>Lipid concentration</th>
+                  <th><input type="number" id="LipidConc_1" value="15" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="LipidConc_2" value="15" size="5" onchange="updateTissueChart()"/></th>
+                  <th><input type="number" id="LipidConc_3" value="15" size="5" onchange="updateTissueChart()"/></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-area">
+            <canvas id="chart_tissue" width="10" height="5"></canvas>
+            <canvas id="chart_chromophores" width="400" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="options-area">
+      <span class="empty"></span>
+      <div class="chart-display-options">
+        <div class="property">
+          <!-- the value 260 and 1580 should be in the JS -->
+          <label for='wv_min'>Minimum Wavelength: <span id="min_label">260</span></label>
+          <input type="range" id="wv_min" value="0" onclick="changeWV()"/> 
+        </div>
+        <div class="property">
+          <label for="wv_max">Maximum Wavelength: <span id="max_label">1580</span></label> 
+          <input type="range" id="wv_max" value="100" onclick="changeWV()"/>
+        </div>
+        <div class="property">
+          <label for="check_log">Log Scale</label>
+          <input type="checkbox" id='check_log' onclick="changeScale()">
+        </div>
+      </div>
+    </div>
   </body>
+  <script src="../js/tissue_abs.js"></script>
 </html>
