@@ -83,7 +83,7 @@ async function plotMuaMus() {
                     min: 10,
                     title: {
                         display: 'true',
-                        text: 'Absorption'
+                        text: 'Absorption (1/m)'
                     },
                 },
                 y_scat: {
@@ -92,7 +92,7 @@ async function plotMuaMus() {
                     min: 0.01,
                     title: {
                         display: 'true',
-                        text: 'Scattering'
+                        text: 'Scattering  (1/m)'
                     },
                 },
                 x: {
@@ -147,7 +147,7 @@ async function plotMueff() {
                     type: 'logarithmic',
                     title: {
                         display: 'true',
-                        text: 'Effective Absorption'
+                        text: 'Effective Absorption  (1/m)'
                     },
                 },
                 x: {

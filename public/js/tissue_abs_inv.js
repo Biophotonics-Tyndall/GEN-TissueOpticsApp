@@ -8,18 +8,6 @@ let Spectra; // Variable containing the Spectra used in the app
 let targetSpec; // Variable containing the reference spectrum (spectrum that needs to be matched)
 let tissueChart; // Variable pointing to the chart object
 
-// Initialise buttons to update the graph
-//const button_update = document.getElementById('update');
-//button_update.addEventListener('click', async event => {
-//    updateTissueChart();
-//});
-
-// Initialise buttons to select the reference spectra
-//const button_refSpec = document.getElementById('selectRefSpec');
-//button_refSpec.addEventListener('click', async event => {
-//    changeRefSpectrum();
-//});
-
 // Operation donn when the page is opened
 getData()
     .then(response => {
@@ -109,20 +97,6 @@ function updateTissueChart() { // Function to update the chart
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra.chrom);
     tissueChart.data.datasets[1].data = absorption;
 
-//    let wv_min = parseInt(document.getElementById('wv_min').value);
-//    let wv_max = parseInt(document.getElementById('wv_max').value);
-//
-//    if(wv_min < 260) {
-//        wv_min = 260;
-//        document.getElementById('wv_min').value = "260";
-//    };
-//    if(wv_max > 1580) {
-//        wv_max = 1580;
-//        document.getElementById('wv_min').value = "1580";
-//    };
-
-    tissueChart.options.scales.x.min = wv_min;
-    tissueChart.options.scales.x.max = wv_max;
     tissueChart.update();
 };
 

@@ -154,7 +154,7 @@ async function plotSpectra_chrom() { // Function to initiliase the plot of the c
                     min: 0.01,
                     title: {
                         display: 'true',
-                        text: 'Absorption'
+                        text: 'Absorption  (1/m)'
                     },
                 },
                 x: {

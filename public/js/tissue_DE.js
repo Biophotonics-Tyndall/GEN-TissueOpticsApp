@@ -32,7 +32,7 @@ async function getData() { // Function to load all the necessary data
 async function plotMuaMus() { // Function to plot the graph with mua and mus
     const x = document.getElementById("check_log");
     x.checked = true;
-    
+
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
@@ -81,7 +81,7 @@ async function plotMuaMus() { // Function to plot the graph with mua and mus
                     min: 10,
                     title: {
                         display: 'true',
-                        text: 'Absorption'
+                        text: 'Absorption  (1/m)'
                     },
                 },
                 y_scat: {
@@ -90,7 +90,7 @@ async function plotMuaMus() { // Function to plot the graph with mua and mus
                     min: 0.01,
                     title: {
                         display: 'true',
-                        text: 'Scattering'
+                        text: 'Scattering  (1/m)'
                     },
                 },
                 x: {
