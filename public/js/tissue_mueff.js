@@ -8,12 +8,6 @@ let Spectra; // Variable containing the Spectra used in the app
 let muChart; // Variable pointing to the chart object containing mua and mus
 let mueffChart; // Variable pointing to the chart object containing mueff
 
-// Initialise buttons to update the graph
-//const button = document.getElementById('update');
-//button.addEventListener('click', async event => {
-//    updateCharts();
-//});
-
 // Operation donn when the page is opened
 getData()
     .then(response => {
@@ -185,24 +179,7 @@ function updateCharts() { // Function to update the chart ADD THE UPDATE OF THE 
     const mueff = calcTissueMueff(absorption,mus);
     mueffChart.data.datasets[0].data = mueff;
 
-//    let wv_min = parseInt(document.getElementById('wv_min').value);
-//    let wv_max = parseInt(document.getElementById('wv_max').value);
-
-//    if(wv_min < 260) {
-//        wv_min = 260;
-//        document.getElementById('wv_min').value = "260";
-//    };
-//    if(wv_max > 1580) {
-//        wv_max = 1580;
-//        document.getElementById('wv_min').value = "1580";
-//    };
-
-//    muChart.options.scales.x.min = wv_min;
-//    muChart.options.scales.x.max = wv_max;
     muChart.update();
-
-//    mueffChart.options.scales.x.min = wv_min;
-//    mueffChart.options.scales.x.max = wv_max;
     mueffChart.update();
 };
 
