@@ -30,6 +30,9 @@ async function getData() { // Function to load all the necessary data
 }
 
 async function plotMuaMus() { // Function to plot the graph with mua and mus
+    const x = document.getElementById("check_log");
+    x.checked = true;
+    
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
@@ -374,4 +377,14 @@ function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to
         absorption.push(abs);
     }
     return absorption;
+}
+
+function changeScale(){ // Function to change the scale from linear to logarithmic
+    const x = document.getElementById("check_log");
+    if (x.checked) {
+        muChart.options.scales.y_abs.type = 'logarithmic';
+    } else {
+        muChart.options.scales.y_abs.type = 'linear';
+    }
+    muChart.update();
 }
