@@ -9,10 +9,10 @@ let muChart; // Variable pointing to the chart object containing mua and mus
 let mueffChart; // Variable pointing to the chart object containing mueff
 
 // Initialise buttons to update the graph
-const button = document.getElementById('update');
-button.addEventListener('click', async event => {
-    updateCharts();
-});
+//const button = document.getElementById('update');
+//button.addEventListener('click', async event => {
+//    updateCharts();
+//});
 
 // Operation donn when the page is opened
 getData()
@@ -38,6 +38,9 @@ async function getData() { // Function to load all the data necessary for the ap
 }
 
 async function plotMuaMus() {
+    const x = document.getElementById("check_log");
+    x.checked = true;
+
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
@@ -180,38 +183,40 @@ function updateCharts() { // Function to update the chart ADD THE UPDATE OF THE 
     muChart.data.datasets[1].data = mus;
 
     const mueff = calcTissueMueff(absorption,mus);
-    console.log(mueff)
     mueffChart.data.datasets[0].data = mueff;
 
-    let wv_min = parseInt(document.getElementById('wv_min').value);
-    let wv_max = parseInt(document.getElementById('wv_max').value);
+//    let wv_min = parseInt(document.getElementById('wv_min').value);
+//    let wv_max = parseInt(document.getElementById('wv_max').value);
 
-    if(wv_min < 260) {
-        wv_min = 260;
-        document.getElementById('wv_min').value = "260";
-    };
-    if(wv_max > 1580) {
-        wv_max = 1580;
-        document.getElementById('wv_min').value = "1580";
-    };
+//    if(wv_min < 260) {
+//        wv_min = 260;
+//        document.getElementById('wv_min').value = "260";
+//    };
+//    if(wv_max > 1580) {
+//        wv_max = 1580;
+//        document.getElementById('wv_min').value = "1580";
+//    };
 
-    muChart.options.scales.x.min = wv_min;
-    muChart.options.scales.x.max = wv_max;
+//    muChart.options.scales.x.min = wv_min;
+//    muChart.options.scales.x.max = wv_max;
     muChart.update();
 
-    mueffChart.options.scales.x.min = wv_min;
-    mueffChart.options.scales.x.max = wv_max;
+//    mueffChart.options.scales.x.min = wv_min;
+//    mueffChart.options.scales.x.max = wv_max;
     mueffChart.update();
 };
 
 function changeScale(){ // Function to change the scale from linear to logarithmic
     const x = document.getElementById("check_log");
     if (x.checked) {
-        muChart.options.scales.y.type = 'logarithmic';
+        muChart.options.scales.y_abs.type = 'logarithmic';
+        mueffChart.options.scales.y.type = 'logarithmic';
     } else {
-        muChart.options.scales.y.type = 'linear';
+        muChart.options.scales.y_abs.type = 'linear';
+        mueffChart.options.scales.y.type = 'linear';
     }
     muChart.update();
+    mueffChart.update();
 }
 
 function calcTissueScat(a_Ray,a_Mie,b_Mie,wl) {
@@ -246,4 +251,35 @@ function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to
         absorption.push(abs);
     }
     return absorption;
+}
+
+function changeWV() { // Function to react to the modification of the wavelength sliders
+    let minSlidePos = parseInt(document.getElementById('wv_min').value);
+    let maxSlidePos = parseInt(document.getElementById('wv_max').value);
+
+    let wv_minSlide = 13.20*minSlidePos+260;
+    let wv_maxSlide = 13.20*maxSlidePos+260;
+
+    var min_label = document.getElementById("min_label");
+    var max_label = document.getElementById("max_label");
+    min_label.innerHTML = wv_minSlide.toFixed(0);
+    max_label.innerHTML = wv_maxSlide.toFixed(0);
+
+    minSlidePos.oninput = function() {
+        min_label.innerHTML = wv_minSlide.toFixed(0);
+    }
+    maxSlidePos.oninput = function() {
+        max_label.innerHTML = wv_maxSlide.toFixed(0);
+    }
+
+    let wv_min = Math.round(Math.min(wv_minSlide,wv_maxSlide));
+    let wv_max = Math.round(Math.max(wv_minSlide,wv_maxSlide));
+
+    muChart.options.scales.x.min = wv_min;
+    muChart.options.scales.x.max = wv_max;
+    muChart.update();
+
+    mueffChart.options.scales.x.min = wv_min;
+    mueffChart.options.scales.x.max = wv_max;
+    mueffChart.update();
 }
