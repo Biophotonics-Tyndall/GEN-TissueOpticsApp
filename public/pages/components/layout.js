@@ -15,6 +15,6 @@ document.write(`
         </div>
     <div class="footer">
         <p>Tissue Optic App</p>
-        <div>Developed by: B. Jayet and J.S. Matias</div>
+        <div>Original Matlab Code by: J. Gunther - Developed for web browser by: B. Jayet and J.S. Matias</div>
     </div>
 `);
