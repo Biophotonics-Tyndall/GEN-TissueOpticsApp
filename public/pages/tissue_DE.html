@@ -19,6 +19,7 @@
     <div class="app">
       <div class="title-container">
         <h1>Diffusion equation</h1>
+        Calculate the fluence and reflectance at various wavelengths using the scattering spectrum and absorption spectra of major tissue chromophores.
       </div>
       <div class="app-container">
         <div class="input-area">
@@ -64,10 +65,6 @@
           <div class="property">
             <label for="depth">Depth (semi-infinite)</label>
             <input type="number" id="depth" value="0.005" step="0.001" onchange="updateCharts()"/>
-          </div>
-          <div class="property">
-            <label for="ri">Depth (semi-infinite)</label>
-            <input type="number" id="ri" value="0" step="1" onchange="updateCharts()"/>
           </div>
           <div class="property">
             <label for="ri">Index of refraction</label>
