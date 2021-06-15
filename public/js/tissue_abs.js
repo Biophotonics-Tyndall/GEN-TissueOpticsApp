@@ -56,22 +56,22 @@ async function plotSpectra_tissue() { // Function to initiliase the plot of the 
                 {
                     label: 'Tissue 1',
                     data: absorption1,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(239, 83, 80, 1)',
+                    borderColor: 'rgba(239, 83, 80, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Tissue 2',
                     data: absorption2,
-                    backgroundColor: 'rgba(0, 99, 132, 0.2)',
-                    borderColor: 'rgba(0, 99, 132, 1)',
+                    backgroundColor: 'rgba(2, 119, 189, 1)',
+                    borderColor: 'rgba(2, 119, 189, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Tissue 3',
                     data: absorption3,
-                    backgroundColor: 'rgba(255, 0, 132, 0.2)',
-                    borderColor: 'rgba(255, 0, 132, 1)',
+                    backgroundColor: 'rgba(156, 204, 101, 1)',
+                    borderColor: 'rgba(156, 204, 101, 1)',
                     borderWidth: 1
                 }
             ]
@@ -115,29 +115,29 @@ async function plotSpectra_chrom() { // Function to initiliase the plot of the c
                 {
                     label: 'HbO2',
                     data: Spectra.hbo2,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(211, 47, 47, 1)',
+                    borderColor: 'rgba(211, 47, 47, 1)',
                     borderWidth: 1
                 },
                 {   
                     label: 'Hb',
                     data: Spectra.hb,
-                    backgroundColor: 'rgba(99, 132, 255, 0.2)',
-                    borderColor: 'rgba(99, 132, 255, 1)',
+                    backgroundColor: 'rgba(123, 31, 162, 1)',
+                    borderColor: 'rgba(123, 31, 162, 1)',
                     borderWidth: 1
                 },
                 {   
                     label: 'Water',
                     data: Spectra.water,
-                    backgroundColor: 'rgba(99, 0, 255, 0.2)',
-                    borderColor: 'rgba(99, 0, 255, 1)',
+                    backgroundColor: 'rgba(13, 71, 161, 1)',
+                    borderColor: 'rgba(13, 71, 161, 1)',
                     borderWidth: 1
                 },
                 {   
                     label: 'Lipids',
                     data: Spectra.lipid,
-                    backgroundColor: 'rgba(99, 132, 0, 0.2)',
-                    borderColor: 'rgba(99, 132, 0, 1)',
+                    backgroundColor: 'rgba(249, 168, 37, 1)',
+                    borderColor: 'rgba(249, 168, 37, 1)',
                     borderWidth: 1
                 }
             ]

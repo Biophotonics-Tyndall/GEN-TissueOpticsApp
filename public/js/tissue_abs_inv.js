@@ -49,15 +49,15 @@ async function plotSpectra() { // Function to initiliase the plot
                 {
                     label: 'Spetrum to match',
                     data: targetSpec,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(0, 0, 0, 1)',
+                    borderColor: 'rgba(0, 0, 0, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Your tissue',
                     data: absorption,
-                    backgroundColor: 'rgba(0, 99, 132, 0.2)',
-                    borderColor: 'rgba(0, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 111, 0, 1)',
+                    borderColor: 'rgba(255, 111, 0, 1)',
                     borderWidth: 1
                 }
             ]
