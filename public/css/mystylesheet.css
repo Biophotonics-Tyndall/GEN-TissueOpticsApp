@@ -171,6 +171,11 @@ input[type='range'] ::-webkit-slider-thumb{
     width: 100%;
     padding-left: 200px;
 }
+.info-area{
+    margin: auto;
+    max-width: 900px;
+    padding: 40px;
+}
 .property{
     display: grid;
     grid-template-rows: 1fr 1fr;

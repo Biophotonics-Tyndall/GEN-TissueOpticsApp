@@ -23,27 +23,27 @@
       </div>
       <div class="app-container">
         <div class="input-area">
-          <h2>Measurement spectrum (Between 1 and 21):</h2> 
+          <h2>Measurement spectrum:</h2> 
           <div class="property">
-            <input type="number" id="refSpecNumber" value="1" onchange="changeRefSpectrum()"/>
+            <input type="number" placeholder="Between 1 and 21" id="refSpecNumber" value="" step="1" min="1" max="21" onchange="changeRefSpectrum()"/>
           </div>
            
           <h2>Match the spectrum</h2>
           <div class="property">
             <label for="BloodConc">Blood Concentration</label>
-            <input type="number" id="BloodConc" value="5" onchange="updateTissueChart()"/>
+            <input type="number" id="BloodConc" value="5" step="1" min="0" onchange="updateTissueChart()"/>
           </div>
           <div class="property">
             <label for="BloodSat">Blood Saturation</label>
-            <input type="number" id="BloodSat" value="60" onchange="updateTissueChart()"/>
+            <input type="number" id="BloodSat" value="60" step="1" min="0" onchange="updateTissueChart()"/>
           </div>
           <div class="property">
             <label for="WaterConc">Water Concentration</label>
-            <input type="number" id="WaterConc" value="65" onchange="updateTissueChart()"/>
+            <input type="number" id="WaterConc" value="65" step="1" min="0" onchange="updateTissueChart()"/>
           </div>
           <div class="property">
             <label for="LipidConc">Lipid Concentration</label>
-            <input type="number" id="LipidConc" value="15" onchange="updateTissueChart()"/>
+            <input type="number" id="LipidConc" value="15" step="1" min="0" onchange="updateTissueChart()"/>
           </div>
         </div>
 
