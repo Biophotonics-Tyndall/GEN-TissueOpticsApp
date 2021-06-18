@@ -54,16 +54,16 @@ async function plotMuaMus() { // Function to plot the graph with mua and mus
                     yAxisID: 'y_abs',
                     label: 'Absorption',
                     data: absorption,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(183, 28, 28, 1)',
+                    borderColor: 'rgba(183, 28, 28, 1)',
                     borderWidth: 1
                 },
                 {   
                     yAxisID: 'y_scat',
                     label: 'Scattering',
                     data: mus,
-                    backgroundColor: 'rgba(99, 0, 255, 0.2)',
-                    borderColor: 'rgba(99, 0, 255, 1)',
+                    backgroundColor: 'rgba(1, 87, 155, 1)',
+                    borderColor: 'rgba(1, 87, 155, 1)',
                     borderWidth: 1
                 },
             ]
@@ -136,21 +136,21 @@ async function plotDE() { // Function to plot the graph with diffusion equation 
                 {
                     label: 'Infinite medium',
                     data: flu_infinite,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    backgroundColor: 'rgba(255, 99, 132, 1)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Semi-infinite medium',
                     data: flu_semi,
-                    backgroundColor: 'rgba(0, 99, 132, 0.2)',
+                    backgroundColor: 'rgba(0, 99, 132, 1)',
                     borderColor: 'rgba(0, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Semi-infinite medium',
+                    label: 'Reflectance',
                     data: refl,
-                    backgroundColor: 'rgba(0, 99, 0, 0.2)',
+                    backgroundColor: 'rgba(0, 99, 0, 1)',
                     borderColor: 'rgba(0, 99, 0, 1)',
                     borderWidth: 1
                 }
@@ -315,7 +315,11 @@ function CWsemi(mua,mus,SDD,Depth,P0,ri) { // Function to calculate the DE for a
     const muc = Math.cos(Math.asin(c/c0));
     const r0 = ((c0-c)/(c0+c))*((c0-c)/(c0+c));
     const kappa = ((1-r0)*(1-muc*muc))/(1+r0+(1-r0)*muc*muc*muc);
-
+    console.log(c);
+    console.log(mueff);
+    console.log(muc);
+    console.log(r0);
+    console.log(kappa);
     var i;
     var fluence = [];
 

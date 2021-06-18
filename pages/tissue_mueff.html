@@ -19,6 +19,7 @@
       <div class="app">
         <div class="title-container">
           <h1>Tissue effective attenuation</h1>
+          Calculate the tissue absorption coefficient and reduced scattering coefficient at various wavelengths. Then determine the effective attenuation coefficient.
         </div>
 
         <div class="app-container">
@@ -26,33 +27,33 @@
             <h2>Tissue properties</h2>
             <div class="property">
               <label for="BloodConc">Blood Concentration</label>
-              <input type="number" id="BloodConc" value="5" onchange="updateCharts()"/>
+              <input type="number" id="BloodConc" value="5" step="1" min="0" onchange="updateCharts()"/>
             </div>
             <div class="property">
               <label for="BloodSat">Blood Saturation</label>
-              <input type="number" id="BloodSat" value="60" onchange="updateCharts()"/>
+              <input type="number" id="BloodSat" value="60" step="1" min="0" onchange="updateCharts()"/>
             </div>
             <div class="property">
               <label for="WaterConc">Water Concentration</label>
-              <input type="number" id="WaterConc" value="65" onchange="updateCharts()"/>
+              <input type="number" id="WaterConc" value="65" step="1" min="0" onchange="updateCharts()"/>
             </div>
             <div class="property">
               <label for="LipidConc">Lipid Concentration</label>
-              <input type="number" id="LipidConc" value="15" onchange="updateCharts()"/>
+              <input type="number" id="LipidConc" value="15" step="1" min="0" onchange="updateCharts()"/>
             </div>
 
             <h2>Scattering properties</h2>
             <div class="property">
               <label for="RayProbFactor">Rayleigh scattering probability factor</label>
-              <input type="number" id="RayProbFactor" value="500" onchange="updateCharts()"/>
+              <input type="number" id="RayProbFactor" value="500" step="10" min="0" onchange="updateCharts()"/>
             </div>
             <div class="property">
               <label for="MieProbFactor">Mie scattering probability factor</label>
-              <input type="number" id="MieProbFactor" value="2000" onchange="updateCharts()"/>
+              <input type="number" id="MieProbFactor" value="2000" step="100" min="0" onchange="updateCharts()"/>
             </div>
             <div class="property">
               <label for="MieSizeParam">Mie size parameter coefficient</label>
-              <input type="number" id="MieSizeParam" value="1" onchange="updateCharts()"/>
+              <input type="number" id="MieSizeParam" value="1.0" step="0.1" min="0" onchange="updateCharts()"/>
             </div>
           </div>
 

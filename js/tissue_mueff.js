@@ -56,16 +56,16 @@ async function plotMuaMus() {
                     yAxisID: 'y_abs',
                     label: 'Absorption',
                     data: absorption,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(183, 28, 28, 1)',
+                    borderColor: 'rgba(183, 28, 28, 1)',
                     borderWidth: 1
                 },
                 {   
                     yAxisID: 'y_scat',
                     label: 'Scattering',
                     data: mus,
-                    backgroundColor: 'rgba(99, 0, 255, 0.2)',
-                    borderColor: 'rgba(99, 0, 255, 1)',
+                    backgroundColor: 'rgba(1, 87, 155, 1)',
+                    borderColor: 'rgba(1, 87, 155, 1)',
                     borderWidth: 1
                 },
             ]
@@ -130,8 +130,8 @@ async function plotMueff() {
                 {
                     label: 'Effective absorption',
                     data: mueff,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(81, 45, 168, 1)',
+                    borderColor: 'rgba(81, 45, 168, 1)',
                     borderWidth: 1
                 }
             ]
@@ -147,7 +147,7 @@ async function plotMueff() {
                     type: 'logarithmic',
                     title: {
                         display: 'true',
-                        text: 'Effective Absorption  (1/m)'
+                        text: 'Effective attenuation  (1/m)'
                     },
                 },
                 x: {

@@ -19,6 +19,7 @@
     <div class="app">
       <div class="title-container">
         <h1>Tissue absorption</h1>
+        Calculate the tissue absorption coefficient at various wavelengths using the absorption spectra of the major tissue chromophores.
       </div>
       <div class="app-container">
         <div class="input-area">
@@ -27,36 +28,36 @@
             <table id="TissueProp" class="styled-table">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Tissue 1</th>
-                  <th>Tissue 2</th>
-                  <th>Tissue 3</th>
+                  <th>Tissue:</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th>Blood Concentration</th>
-                  <th><input type="number" id="BloodConc_1" value="5" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="BloodConc_2" value="5" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="BloodConc_3" value="5" size="5" onchange="updateTissueChart()"/></th>
+                  <td>Blood Concentration</td>
+                  <td><input type="number" id="BloodConc_1" value="5" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="BloodConc_2" value="5" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="BloodConc_3" value="5" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
                 </tr>
                 <tr>
-                  <th>Blood saturation</th>
-                  <th><input type="number" id="BloodSat_1" value="60" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="BloodSat_2" value="75" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="BloodSat_3" value="90" size="5" onchange="updateTissueChart()"/></th>
+                  <td>Blood saturation</td>
+                  <td><input type="number" id="BloodSat_1" value="60" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="BloodSat_2" value="75" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="BloodSat_3" value="90" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
                 </tr>
                 <tr>
-                  <th>Water concentration</th>
-                  <th><input type="number" id="WaterConc_1" value="65" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="WaterConc_2" value="65" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="WaterConc_3" value="65" size="5" onchange="updateTissueChart()"/></th>
+                  <td>Water concentration</td>
+                  <td><input type="number" id="WaterConc_1" value="65" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="WaterConc_2" value="65" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="WaterConc_3" value="65" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
                 </tr>
                 <tr>
-                  <th>Lipid concentration</th>
-                  <th><input type="number" id="LipidConc_1" value="15" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="LipidConc_2" value="15" size="5" onchange="updateTissueChart()"/></th>
-                  <th><input type="number" id="LipidConc_3" value="15" size="5" onchange="updateTissueChart()"/></th>
+                  <td>Lipid concentration</td>
+                  <td><input type="number" id="LipidConc_1" value="15" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="LipidConc_2" value="15" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
+                  <td><input type="number" id="LipidConc_3" value="15" size="5" step="1" min="0" onchange="updateTissueChart()"/></td>
                 </tr>
               </tbody>
             </table>
