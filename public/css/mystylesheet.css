@@ -54,7 +54,11 @@ h1 {
     font-size: 28px 
 }
 h2 {
-    font-size: 22px 
+    font-size: 22px;
+    border-left: solid gray 13px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 h3 {
     font-size: 18px 
@@ -117,11 +121,9 @@ input[type='range'] {
     border-radius: 10px;
     /* margin-top: -1px; */
 }
-
 input[type='range'] ::-webkit-slider-thumb{
     color: #0fb0d3;
 }
-
 .title-container{
     padding: 1rem;
     background: #0fb0d3
@@ -251,7 +253,7 @@ input[type='range'] ::-webkit-slider-thumb{
 }
 .styled-table th,
 .styled-table td {
-    padding: 8px 5px;
+    padding: 8px 9px;
 }
 .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
@@ -265,6 +267,10 @@ input[type='range'] ::-webkit-slider-thumb{
 :focus {
     outline: 0;
 }
+.styled-table input[type='number']{
+    width: 45px;
+    height: 40px;
+} 
 .btn-custom {
     margin-top: 20px;
     background-color: transparent !important;
