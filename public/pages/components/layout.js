@@ -14,7 +14,7 @@ document.write(`
             <div class="navbar-item"><a href="${root}/pages/about.html">About</a></div>
         </div>
     <div class="footer">
-        <p>Tissue Optic App</p>
-        <div>Original Matlab Code by: J. Gunther - Developed for web browser by: B. Jayet and J.S. Matias</div>
+        <p>Tissue Optic App for educational purpose</p>
+        <p>Source code available under MIT licence on <a href="https://github.com/Biophotonics-Tyndall/GEN-TissueOpticsApp">GitHub</a></p>
     </div>
 `);

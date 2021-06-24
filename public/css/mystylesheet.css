@@ -198,6 +198,9 @@ input[type='range'] ::-webkit-slider-thumb{
     text-align: center;
     z-index: 1000;
 }
+.footer a {
+    color:deepskyblue;
+}
 .navbar-title{
     padding: 10px;
     text-transform: uppercase;
