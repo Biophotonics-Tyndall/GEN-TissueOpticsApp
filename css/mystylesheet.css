@@ -200,6 +200,9 @@ input[type='range'] ::-webkit-slider-thumb{
     text-align: center;
     z-index: 1000;
 }
+.footer p {
+    text-align:center;
+}
 .footer a {
     color:deepskyblue;
 }
