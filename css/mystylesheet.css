@@ -87,15 +87,17 @@ button:focus {
     outline: none;
 }
 ul, li, ol {
-    margin: 0px;
+    margin: 10px;
     padding: 0px;
-    list-style: none;
+    list-style: circle;
+    text-align: justify;
 }
 p {
     margin: 0px;
     font-weight: 300;
     font-size: 15px;
     line-height: 24px;
+    text-align: justify;
 }
 a {
     color: #222222;
