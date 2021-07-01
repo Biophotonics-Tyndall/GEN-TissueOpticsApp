@@ -128,7 +128,7 @@ async function plotMueff() {
             labels: Spectra.wavelength,
             datasets: [
                 {
-                    label: 'Effective absorption',
+                    label: 'Effective attenuation',
                     data: mueff,
                     backgroundColor: 'rgba(81, 45, 168, 1)',
                     borderColor: 'rgba(81, 45, 168, 1)',
