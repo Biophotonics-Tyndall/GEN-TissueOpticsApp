@@ -92,6 +92,9 @@ ul, li, ol {
     list-style: circle;
     text-align: justify;
 }
+dd {
+    text-align: justify;
+}
 p {
     margin: 0px;
     font-weight: 300;
