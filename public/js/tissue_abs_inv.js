@@ -8,7 +8,7 @@ let Spectra; // Variable containing the Spectra used in the app
 let targetSpec; // Variable containing the reference spectrum (spectrum that needs to be matched)
 let tissueChart; // Variable pointing to the chart object
 
-// Operation donn when the page is opened
+// Operation done when the page is opened
 getData()
     .then(response => {
         Spectra = response;
@@ -34,12 +34,14 @@ async function plotSpectra() { // Function to initiliase the plot
     const x = document.getElementById("check_log");
     x.checked = true;
 
+    // Get the absorption properties from the page and calculate mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
     const Saturation = document.getElementById('BloodSat').value;
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra.chrom);
 
+    // Generate the chart object for mua
     const ctx = document.getElementById('chart_spectra').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -90,13 +92,15 @@ async function plotSpectra() { // Function to initiliase the plot
 }
 
 function updateTissueChart() { // Function to update the chart
+
+    // Get the absorption properties from the page and calculate mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
     const Saturation = document.getElementById('BloodSat').value;
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra.chrom);
+    
     tissueChart.data.datasets[1].data = absorption;
-
     tissueChart.update();
 };
 

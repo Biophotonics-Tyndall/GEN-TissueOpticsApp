@@ -8,7 +8,7 @@ let Spectra; // Variable containing the Spectra used in the app
 let muChart; // Variable pointing to the chart object containing mua and mus
 let DEChart; // Variable pointing to the chart object containing the diffusion equation results
 
-// Operation donn when the page is opened
+// Operation done when the page is opened
 getData()
     .then(response => {
         Spectra = response;
@@ -29,21 +29,24 @@ async function getData() { // Function to load all the necessary data
     return chrom;
 }
 
-async function plotMuaMus() { // Function to plot the graph with mua and mus
+async function plotMuaMus() { // Function to generate the plots of mua and mus
     const x = document.getElementById("check_log");
     x.checked = true;
 
+    // Get the absorption properties from the page and calculate the mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
     const Saturation = document.getElementById('BloodSat').value;
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra);
 
+    // Get the scattering properties from the page and calculate mus
     const a_Rayleigh = document.getElementById('RayProbFactor').value;
     const a_Mie = document.getElementById('MieProbFactor').value;
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
 
+    // Generate the chart object for mua and mus
     const ctx = document.getElementById('chart_mua_mus').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -105,28 +108,35 @@ async function plotMuaMus() { // Function to plot the graph with mua and mus
     return myChart;
 }
 
-async function plotDE() { // Function to plot the graph with diffusion equation results
+async function plotDE() { // Function to generate the plots of the diffusion equation results
+
+    // Get the absorption properties from the page and calculate the mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
     const Saturation = document.getElementById('BloodSat').value;
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra);
 
+    // Get the scattering properties from the page and calculate mus
     const a_Rayleigh = document.getElementById('RayProbFactor').value;
     const a_Mie = document.getElementById('MieProbFactor').value;
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
 
+    // Compute the fluence for an infinite medium
     const SDD = document.getElementById("SDD").value;
     const P0 = document.getElementById("power").value;
     const flu_infinite = CWInfinite(absorption,mus,SDD,P0);
 
+    // Compute the fluence for a semi infinite medium
     const Depth = document.getElementById("depth").value;
     const ri = document.getElementById("ri").value;
     const flu_semi = CWsemi(absorption,mus,SDD,Depth,P0,ri);
 
+    // Compute the reflectance
     const refl = CWout(absorption,mus,SDD,P0,ri);
 
+    // Generate the chart object
     const ctx = document.getElementById('chart_DE').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -185,6 +195,8 @@ async function plotDE() { // Function to plot the graph with diffusion equation 
 }
 
 function updateCharts() { // Function to update the chart
+
+    // Get the absorption properties from the page and calculate the mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
@@ -192,49 +204,53 @@ function updateCharts() { // Function to update the chart
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra);
     muChart.data.datasets[0].data = absorption;
 
+    // Get the scattering properties from the page and calculate mus
     const a_Rayleigh = document.getElementById('RayProbFactor').value;
     const a_Mie = document.getElementById('MieProbFactor').value;
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
     muChart.data.datasets[1].data = mus;
 
+    // Get the geometrical parameters and compute the new fluence for infinite medium
     const SDD = document.getElementById("SDD").value;
     const P0 = document.getElementById("power").value;
     const flu_infinite = CWInfinite(absorption,mus,SDD,P0);
     DEChart.data.datasets[0].data = flu_infinite;
 
+    // Get the geometrical parameters and compute the new fluence for semi-infinite medium
     const Depth = document.getElementById("depth").value;
     const ri = document.getElementById("ri").value;
     const flu_semi = CWsemi(absorption,mus,SDD,Depth,P0,ri);
     DEChart.data.datasets[1].data = flu_semi;
 
+    // Compute the new reflectance
     const refl = CWout(absorption,mus,SDD,P0,ri);
     DEChart.data.datasets[2].data = refl;
 
     let minSlidePos = parseInt(document.getElementById('wv_min').value);
     let maxSlidePos = parseInt(document.getElementById('wv_max').value);
 
-    wv_minSlide = 13.20*minSlidePos+260;
-    wv_maxSlide = 13.20*maxSlidePos+260;
+//    wv_minSlide = 13.20*minSlidePos+260;
+//    wv_maxSlide = 13.20*maxSlidePos+260;
+//
+//    wv_min = Math.min(wv_minSlide,wv_maxSlide)
+//    wv_max = Math.max(wv_minSlide,wv_maxSlide)
 
-    wv_min = Math.min(wv_minSlide,wv_maxSlide)
-    wv_max = Math.max(wv_minSlide,wv_maxSlide)
+//    if(wv_min < 260) {
+//        wv_min = 260;
+//        document.getElementById('wv_min').value = "260";
+//    };
+//    if(wv_max > 1580) {
+ //       wv_max = 1580;
+ //       document.getElementById('wv_min').value = "1580";
+//    };
 
-    if(wv_min < 260) {
-        wv_min = 260;
-        document.getElementById('wv_min').value = "260";
-    };
-    if(wv_max > 1580) {
-        wv_max = 1580;
-        document.getElementById('wv_min').value = "1580";
-    };
-
-    muChart.options.scales.x.min = wv_min;
-    muChart.options.scales.x.max = wv_max;
+//    muChart.options.scales.x.min = wv_min;
+//    muChart.options.scales.x.max = wv_max;
     muChart.update();
 
-    DEChart.options.scales.x.min = wv_min;
-    DEChart.options.scales.x.max = wv_max;
+//    DEChart.options.scales.x.min = wv_min;
+//    DEChart.options.scales.x.max = wv_max;
     DEChart.update();
 };
 
@@ -338,7 +354,7 @@ function CWsemi(mua,mus,SDD,Depth,P0,ri) { // Function to calculate the DE for a
     return fluence;
 }
 
-function calcTissueMueff(mua,mus) {
+function calcTissueMueff(mua,mus) { // Function to calculate mueff from mua and mus
     var mueff = [];
     var i;
 
@@ -358,17 +374,6 @@ function calcTissueScat(a_Ray,a_Mie,b_Mie,wl) { // Function to calculate mus
         Sca.push(s);
     }
     return Sca;
-}
-
-function calcTissueMueff(mua,mus) {
-    var mueff = [];
-    var i;
-
-    for (i=0; i<mua.length; i++){
-        const m = Math.sqrt(3*mua[i]*mus[i]);
-        mueff.push(m);
-    }
-    return mueff;
 }
 
 function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to calculate the absorption spectrum of the tissue

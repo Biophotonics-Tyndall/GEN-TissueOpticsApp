@@ -7,7 +7,7 @@
 let Spectra; // Variable containing the Spectra used in the app
 let tissueChart; // Variable pointing to the chart object
 
-// Operation donn when the page is opened
+// Operation done when the page is opened
 getData()
     .then(response => {
         Spectra = response;
@@ -29,24 +29,28 @@ async function plotSpectra_tissue() { // Function to initiliase the plot of the 
     const x = document.getElementById("check_log");
     x.checked = true;
 
+    // Get the absorption properties from the page and calculate the mua for tissue 1
     const cBlood1 = document.getElementById('BloodConc_1').value;
     const cWater1 = document.getElementById('WaterConc_1').value;
     const cLipid1 = document.getElementById('LipidConc_1').value;
     const Saturation1 = document.getElementById('BloodSat_1').value;
     const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,Spectra);
 
+    // Get the absorption properties from the page and calculate the mua for tissue 2
     const cBlood2 = document.getElementById('BloodConc_2').value;
     const cWater2 = document.getElementById('WaterConc_2').value;
     const cLipid2 = document.getElementById('LipidConc_2').value;
     const Saturation2 = document.getElementById('BloodSat_2').value;
     const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,Spectra);
 
+    // Get the absorption properties from the page and calculate the mua for tissue 3
     const cBlood3 = document.getElementById('BloodConc_3').value;
     const cWater3 = document.getElementById('WaterConc_3').value;
     const cLipid3 = document.getElementById('LipidConc_3').value;
     const Saturation3 = document.getElementById('BloodSat_3').value;
     const absorption3 = calcTissueAbs(cBlood3,cWater3,cLipid3,Saturation3,Spectra);
 
+    // Generate the chart object for mua
     const ctx = document.getElementById('chart_tissue').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -103,9 +107,7 @@ async function plotSpectra_tissue() { // Function to initiliase the plot of the 
     return myChart;
 }
 
-async function plotSpectra_chrom() { // Function to initiliase the plot of the chromophore absorption
- //   const absSpectra = await getData();
-//    console.log(absSpectra);
+async function plotSpectra_chrom() { // Function to initialise the plot of the chromophore absorption
     const ctx = document.getElementById('chart_chromophores').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -169,6 +171,8 @@ async function plotSpectra_chrom() { // Function to initiliase the plot of the c
 }
 
 function updateTissueChart() { // Function to update the chart
+
+    // Get the absorption properties from the page and calculate the mua for tissue 1
     const cBlood1 = document.getElementById('BloodConc_1').value;
     const cWater1 = document.getElementById('WaterConc_1').value;
     const cLipid1 = document.getElementById('LipidConc_1').value;
@@ -176,6 +180,7 @@ function updateTissueChart() { // Function to update the chart
     const absorption1 = calcTissueAbs(cBlood1,cWater1,cLipid1,Saturation1,Spectra);
     tissueChart.data.datasets[0].data = absorption1;
 
+    // Get the absorption properties from the page and calculate the mua for tissue 2
     const cBlood2 = document.getElementById('BloodConc_2').value;
     const cWater2 = document.getElementById('WaterConc_2').value;
     const cLipid2 = document.getElementById('LipidConc_2').value;
@@ -183,6 +188,7 @@ function updateTissueChart() { // Function to update the chart
     const absorption2 = calcTissueAbs(cBlood2,cWater2,cLipid2,Saturation2,Spectra);
     tissueChart.data.datasets[1].data = absorption2;
 
+    // Get the absorption properties from the page and calculate the mua for tissue 3
     const cBlood3 = document.getElementById('BloodConc_3').value;
     const cWater3 = document.getElementById('WaterConc_3').value;
     const cLipid3 = document.getElementById('LipidConc_3').value;

@@ -1,36 +1,38 @@
+<!--
+  HTML code for the layout of the tissue optic app
+  Part of the TissueOpticsApp 
+  Written by B. Jayet & J. S. Matias 
+  Adapted from a MATLAB based app by J. Gunther
+-->
 <html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tissue absorption</title>
+    <meta name="author (adaptation to JavaScript)" content="Baptiste Jayet">
+    <meta name="author (adaptation to JavaScript)" content="Jean S. Matias">
+    <meta name="author (original MATLAB code)" content="Jacqueline Gunther">
+    <link rel="stylesheet" href="../css/mystylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tissue absorption</title>
-  <meta name="author (adaptation to JavaScript)" content="Baptiste Jayet">
-  <meta name="author (adaptation to JavaScript)" content="Jean S. Matias">
-  <meta name="author (original MATLAB code)" content="Jacqueline Gunther">
-  <meta name="description" content="description here">
-  <meta name="keywords" content="keywords,here">
-  <link rel="stylesheet" href="../css/mystylesheet.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
-</head>
-
-<body>
-  <script src="components/layout.js"></script>
-  <div class="app">
-    <div class="title-container">
-      <h1>Title</h1>
-    </div>
-    <div class="app-container">
-      <div class="input-area"><input type="text"></div>
-      <div class="chart-container">
-        <div class="chart-area">chart area</div>
+  <body>
+    <script src="components/layout.js"></script>
+    <div class="app">
+      <div class="title-container">
+        <h1>Title</h1>
+      </div>
+      <div class="app-container">
+        <div class="input-area"><input type="text"></div>
+        <div class="chart-container">
+          <div class="chart-area">chart area</div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="options-area">
-    <span class="empty"></span>
-    <div class="chart-display-options">display option area</div>
-  </div>
-</body>
-
+    <div class="options-area">
+      <span class="empty"></span>
+      <div class="chart-display-options">display option area</div>
+    </div>
+  </body>
 </html>
