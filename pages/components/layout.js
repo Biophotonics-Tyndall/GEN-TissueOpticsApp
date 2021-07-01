@@ -1,3 +1,8 @@
+// JavaScript code for the layout of the pages of the Tissue Optics App
+// Part of the TissueOpticsApp
+// Written by B. Jayet & J. S. Matias 
+// Adapted from a MATLAB based app by J. Gunther
+
 var currentUrlArr = window.location.href.split("/");
 var root = (currentUrlArr[currentUrlArr.length - 2] === 'pages') ? currentUrlArr.slice(0, currentUrlArr.length - 2).join('/') : currentUrlArr.slice(0, currentUrlArr.length - 1).join('/');
 

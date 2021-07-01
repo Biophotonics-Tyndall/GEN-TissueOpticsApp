@@ -1,3 +1,9 @@
+<!--
+  HTML code for the page tissue_mueff.html
+  Part of the TissueOpticsApp 
+  Written by B. Jayet & J. S. Matias 
+  Adapted from a MATLAB based app by J. Gunther
+-->
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,8 +14,6 @@
     <meta name="author (adaptation to JavaScript)" content="Baptiste Jayet">
     <meta name="author (adaptation to JavaScript)" content="Jean S. Matias">
     <meta name="author (original MATLAB code)" content="Jacqueline Gunther">
-    <meta name="description" content="description here">
-    <meta name="keywords" content="keywords,here">
     <link rel="stylesheet" href="../css/mystylesheet.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script> <!-- Load chart.js library -->
   </head>
@@ -22,13 +26,13 @@
 
         <div class="app-container">
           <div class="input-area">
-            <h2>Tissue properties</h2>
+            <h2>Tissue absoprtion properties</h2>
             <div class="property">
               <label for="BloodConc">Blood Concentration</label>
               <input type="number" id="BloodConc" value="5" step="1" min="0" onchange="updateCharts()"/>
             </div>
             <div class="property">
-              <label for="BloodSat">Blood Saturation</label>
+              <label for="BloodSat">Oxygen Saturation</label>
               <input type="number" id="BloodSat" value="60" step="1" min="0" onchange="updateCharts()"/>
             </div>
             <div class="property">

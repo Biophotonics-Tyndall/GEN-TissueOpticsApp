@@ -1,5 +1,5 @@
 // JavaScript code for the page tissue_mueff.html
-// Part of the TissueOpticsApp
+// Part of the TissueOpticsApp 
 // Written by B. Jayet & J. S. Matias 
 // Adapted from a MATLAB based app by J. Gunther
 
@@ -8,7 +8,7 @@ let Spectra; // Variable containing the Spectra used in the app
 let muChart; // Variable pointing to the chart object containing mua and mus
 let mueffChart; // Variable pointing to the chart object containing mueff
 
-// Operation donn when the page is opened
+// Operation done when the page is opened
 getData()
     .then(response => {
         Spectra = response;
@@ -27,25 +27,27 @@ getData()
 async function getData() { // Function to load all the data necessary for the application
     const data2 = await fetch("ChromophoresAbsorptionSpectra.json");
     const chrom = await data2.json();
-
     return chrom;
 }
 
-async function plotMuaMus() {
+async function plotMuaMus() { // Function to generate the plots of mua and mus
     const x = document.getElementById("check_log");
     x.checked = true;
 
+    // Get the absorption properties from the page and calculate the mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
     const Saturation = document.getElementById('BloodSat').value;
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra);
 
+    // Get the scattering properties from the page and calculate mus
     const a_Rayleigh = document.getElementById('RayProbFactor').value;
     const a_Mie = document.getElementById('MieProbFactor').value;
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
 
+    // Generate the chart object for mua and mus
     const ctx = document.getElementById('chart_mua_mus').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -107,20 +109,25 @@ async function plotMuaMus() {
     return myChart;
 }
 
-async function plotMueff() {
+async function plotMueff() { // Function to generate the plots of mueff
+
+    // Get the absorption properties from the page and calculate the mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
     const Saturation = document.getElementById('BloodSat').value;
     const mua = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra);
 
+    // Get the scattering properties from the page and calculate mus
     const a_Rayleigh = document.getElementById('RayProbFactor').value;
     const a_Mie = document.getElementById('MieProbFactor').value;
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
 
+    // Calculate mueff from mua and mus
     const mueff = calcTissueMueff(mua,mus);
 
+    // Generate the chart object for mueff
     const ctx = document.getElementById('chart_mueff').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -128,7 +135,7 @@ async function plotMueff() {
             labels: Spectra.wavelength,
             datasets: [
                 {
-                    label: 'Effective absorption',
+                    label: 'Effective attenuation',
                     data: mueff,
                     backgroundColor: 'rgba(81, 45, 168, 1)',
                     borderColor: 'rgba(81, 45, 168, 1)',
@@ -162,7 +169,9 @@ async function plotMueff() {
     return myChart;
 }
 
-function updateCharts() { // Function to update the chart ADD THE UPDATE OF THE OTHER CHART
+function updateCharts() { // Function to update the charts 
+
+    // Get the absorption properties from the page and calculate the mua
     const cBlood = document.getElementById('BloodConc').value;
     const cWater = document.getElementById('WaterConc').value;
     const cLipid = document.getElementById('LipidConc').value;
@@ -170,15 +179,18 @@ function updateCharts() { // Function to update the chart ADD THE UPDATE OF THE 
     const absorption = calcTissueAbs(cBlood,cWater,cLipid,Saturation,Spectra);
     muChart.data.datasets[0].data = absorption;
 
+    // Get the scattering properties from the page and calculate mus
     const a_Rayleigh = document.getElementById('RayProbFactor').value;
     const a_Mie = document.getElementById('MieProbFactor').value;
     const b_Mie = document.getElementById('MieSizeParam').value;
     const mus = calcTissueScat(a_Rayleigh,a_Mie,b_Mie,Spectra.wavelength);
     muChart.data.datasets[1].data = mus;
 
+    // Calculate the new value of mueff
     const mueff = calcTissueMueff(absorption,mus);
     mueffChart.data.datasets[0].data = mueff;
 
+    // Update the charts
     muChart.update();
     mueffChart.update();
 };
@@ -196,7 +208,7 @@ function changeScale(){ // Function to change the scale from linear to logarithm
     mueffChart.update();
 }
 
-function calcTissueScat(a_Ray,a_Mie,b_Mie,wl) {
+function calcTissueScat(a_Ray,a_Mie,b_Mie,wl) { // Function to calculate mus from the scattering properties
     var Sca = [];
     var i;
 
@@ -207,7 +219,7 @@ function calcTissueScat(a_Ray,a_Mie,b_Mie,wl) {
     return Sca;
 }
 
-function calcTissueMueff(mua,mus) {
+function calcTissueMueff(mua,mus) { // Function to calculate mueff from mua and mus
     var mueff = [];
     var i;
 
@@ -218,7 +230,7 @@ function calcTissueMueff(mua,mus) {
     return mueff;
 }
 
-function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to calculate the absorption spectrum of the tissue
+function calcTissueAbs(cBlood,cWater,cLipid,Saturation,spectra) { // Function to calculate mua from the absorption properties
     const absorption = [];
     const cHb = (cBlood*(1-Saturation/100))/100;
     const cHbO = (cBlood*Saturation/100)/100;
