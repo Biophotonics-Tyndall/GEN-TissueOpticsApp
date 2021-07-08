@@ -1,2 +1,5 @@
-# Ignore nodejs modules folder 
+# Ignore files to run local webserver 
 node_modules/
+index.js
+package.json
+package-lock.json
