@@ -20,8 +20,9 @@ See README file in corresponding folder for installation instructions.
 
 ## User Manual
 User manuals for the app can be found: 
-https://www.researchgate.net/publication/343789233_Using_the_functions_and_subfunctions_of_the_tissue_optics_app_directly_from_MATLAB
-https://www.researchgate.net/publication/343789002_Tissue_optics_simulations
+
+- https://www.researchgate.net/publication/343789233_Using_the_functions_and_subfunctions_of_the_tissue_optics_app_directly_from_MATLAB
+- https://www.researchgate.net/publication/343789002_Tissue_optics_simulations
 
 ## References
 When using our tissue optics app or publishing your results based on the app, please cite:
